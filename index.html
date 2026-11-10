@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" id="themeColor" content="#fdfdfc">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Não Esquecer">
 <title>Não Esquecer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +14,10 @@
 <style>
   :root{
     color-scheme: light;
+
+    --bg:    #fdfdfc;
+    --surface: #ffffff;
+    --surface-2: rgba(255, 255, 255, 0.55);
 
     --ink:   #0a0a0a;
     --ink-2: #525252;
@@ -19,24 +27,116 @@
     --copper:       #b45309;
     --copper-2:     #92400e;
     --copper-light: #f59e0b;
+    --copper-soft:  rgba(180, 83, 9, 0.09);
 
     --forest:   #4a5240;
     --forest-2: #3f4a2e;
+    --forest-soft: rgba(74, 82, 64, 0.12);
+
+    --danger: #b91c1c;
+    --danger-bg: rgba(185, 28, 28, 0.09);
 
     --card:        rgba(255, 255, 255, 0.88);
     --card-border: rgba(0, 0, 0, 0.06);
     --card-border-strong: rgba(0, 0, 0, 0.10);
 
-    --shadow-card:
-      0 1px 2px rgba(0, 0, 0, 0.03),
-      0 8px 24px -8px rgba(0, 0, 0, 0.06),
-      0 24px 48px -16px rgba(180, 83, 9, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    --track: rgba(0, 0, 0, 0.06);
+    --seg:   rgba(0, 0, 0, 0.045);
+    --hover: rgba(0, 0, 0, 0.05);
+    --inset-hi: rgba(255, 255, 255, 0.95);
+    --empty-bg: rgba(255, 255, 255, 0.5);
+    --pin-bg: linear-gradient(180deg, rgba(255, 253, 250, 0.92), rgba(255, 251, 244, 0.85));
+
+    --glow-a: rgba(251, 191, 36, 0.09);
+    --glow-b: rgba(74, 82, 64, 0.05);
+    --glow-c: rgba(180, 83, 9, 0.04);
+
+    --t0: #fffaf3;
+    --t1: #f6f7f1;
+    --t2: #fffdf0;
+    --t3: #fff5f0;
+    --t4: #faf4f1;
 
     --shadow-item:
       0 1px 2px rgba(0, 0, 0, 0.02),
       0 4px 12px -4px rgba(0, 0, 0, 0.05),
-      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      inset 0 1px 0 var(--inset-hi);
+  }
+
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --bg: #141210;
+    --surface: #25221e;
+    --surface-2: rgba(255, 255, 255, 0.04);
+    --ink: #f4f1ec;
+    --ink-2: #b9b3aa;
+    --ink-3: #7f7a72;
+    --ink-4: #4d4943;
+    --copper: #d9822b;
+    --copper-2: #c2701f;
+    --copper-light: #f5b04a;
+    --copper-soft: rgba(217, 130, 43, 0.16);
+    --forest: #6b7a58;
+    --forest-2: #5b6a49;
+    --forest-soft: rgba(107, 122, 88, 0.2);
+    --danger: #f87171;
+    --danger-bg: rgba(248, 113, 113, 0.14);
+    --card: rgba(38, 35, 31, 0.88);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border-strong: rgba(255, 255, 255, 0.15);
+    --track: rgba(255, 255, 255, 0.09);
+    --seg: rgba(255, 255, 255, 0.07);
+    --hover: rgba(255, 255, 255, 0.08);
+    --inset-hi: rgba(255, 255, 255, 0.05);
+    --empty-bg: rgba(255, 255, 255, 0.03);
+    --pin-bg: linear-gradient(180deg, rgba(58, 46, 34, 0.9), rgba(48, 39, 30, 0.85));
+    --glow-a: rgba(251, 191, 36, 0.06);
+    --glow-b: rgba(107, 122, 88, 0.07);
+    --glow-c: rgba(217, 130, 43, 0.05);
+    --t0: #2b2520;
+    --t1: #262a21;
+    --t2: #2c2a1a;
+    --t3: #2d231f;
+    --t4: #2a2321;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --bg: #141210;
+      --surface: #25221e;
+      --surface-2: rgba(255, 255, 255, 0.04);
+      --ink: #f4f1ec;
+      --ink-2: #b9b3aa;
+      --ink-3: #7f7a72;
+      --ink-4: #4d4943;
+      --copper: #d9822b;
+      --copper-2: #c2701f;
+      --copper-light: #f5b04a;
+      --copper-soft: rgba(217, 130, 43, 0.16);
+      --forest: #6b7a58;
+      --forest-2: #5b6a49;
+      --forest-soft: rgba(107, 122, 88, 0.2);
+      --danger: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.14);
+      --card: rgba(38, 35, 31, 0.88);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-strong: rgba(255, 255, 255, 0.15);
+      --track: rgba(255, 255, 255, 0.09);
+      --seg: rgba(255, 255, 255, 0.07);
+      --hover: rgba(255, 255, 255, 0.08);
+      --inset-hi: rgba(255, 255, 255, 0.05);
+      --empty-bg: rgba(255, 255, 255, 0.03);
+      --pin-bg: linear-gradient(180deg, rgba(58, 46, 34, 0.9), rgba(48, 39, 30, 0.85));
+      --glow-a: rgba(251, 191, 36, 0.06);
+      --glow-b: rgba(107, 122, 88, 0.07);
+      --glow-c: rgba(217, 130, 43, 0.05);
+      --t0: #2b2520;
+      --t1: #262a21;
+      --t2: #2c2a1a;
+      --t3: #2d231f;
+      --t4: #2a2321;
+    }
   }
 
   *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -55,12 +155,13 @@
     letter-spacing: -0.011em;
     color: var(--ink);
     overflow: hidden;
-    background-color: #fdfdfc;
+    background-color: var(--bg);
     background-image:
-      radial-gradient(ellipse 90% 55% at 50% -5%, rgba(251, 191, 36, 0.09), transparent 65%),
-      radial-gradient(ellipse 70% 45% at 50% 105%, rgba(74, 82, 64, 0.05), transparent 65%),
-      radial-gradient(ellipse 40% 30% at 15% 40%, rgba(180, 83, 9, 0.04), transparent 70%);
+      radial-gradient(ellipse 90% 55% at 50% -5%, var(--glow-a), transparent 65%),
+      radial-gradient(ellipse 70% 45% at 50% 105%, var(--glow-b), transparent 65%),
+      radial-gradient(ellipse 40% 30% at 15% 40%, var(--glow-c), transparent 70%);
     background-attachment: fixed;
+    transition: background-color .3s;
   }
 
   .app{
@@ -68,7 +169,7 @@
     z-index: 1;
     width: min(100vw, 400px);
     height: min(100dvh, 860px);
-    padding: 24px 20px 16px;
+    padding: 20px 20px 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -82,6 +183,13 @@
     flex-shrink: 0;
   }
 
+  .eyebrow-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 0 -6px -2px 0;
+  }
   .eyebrow{
     margin: 0;
     font-size: 11.5px;
@@ -91,6 +199,23 @@
     line-height: 1.3;
   }
   .eyebrow .sep{ opacity: .5; margin: 0 4px; }
+
+  .icon-btn{
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--ink-2);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background .15s, color .15s, transform .1s;
+  }
+  .icon-btn:hover{ background: var(--hover); color: var(--ink); }
+  .icon-btn:active{ transform: scale(.92); }
+  .icon-btn.on{ background: var(--copper-soft); color: var(--copper); }
+  .icon-group{ display: flex; gap: 0; }
 
   .top-row{
     display: flex;
@@ -130,7 +255,7 @@
     width: 100%;
     height: 3px;
     border-radius: 99px;
-    background: rgba(0, 0, 0, 0.06);
+    background: var(--track);
     overflow: hidden;
     transition: opacity .2s ease;
   }
@@ -151,18 +276,20 @@
     gap: 2px;
     padding: 3px;
     border-radius: 11px;
-    background: rgba(0, 0, 0, 0.045);
+    background: var(--seg);
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
   }
   .mode-tab{
+    position: relative;
     flex: 1;
+    min-width: 0;
     height: 34px;
-    padding: 0 8px;
+    padding: 0 4px;
     border: 0;
     border-radius: 8px;
     background: transparent;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     letter-spacing: -.005em;
     color: var(--ink-2);
@@ -170,19 +297,71 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
     transition: background .15s, color .15s, box-shadow .15s;
   }
   .mode-tab:hover{ color: var(--ink); }
   .mode-tab.active{
-    background: #ffffff;
+    background: var(--surface);
     color: var(--ink);
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.06),
+      0 1px 2px rgba(0, 0, 0, 0.08),
       0 0 0 0.5px rgba(0, 0, 0, 0.03);
   }
-  .mode-tab svg{ opacity: .55; color: var(--ink-2); }
+  .mode-tab svg{ opacity: .55; color: var(--ink-2); flex-shrink: 0; }
   .mode-tab.active svg{ opacity: 1; color: var(--copper); }
+  .badge{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 4px;
+    border-radius: 99px;
+    background: var(--copper);
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .badge:empty{ display: none; }
+
+  @media (max-width: 359px){
+    .mode-tab svg{ display: none; }
+  }
+
+  /* ═══════════════ pesquisa ═══════════════ */
+  .searchbar{
+    display: none;
+    align-items: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 6px 0 12px;
+    border-radius: 12px;
+    background: var(--seg);
+    color: var(--ink-3);
+    flex-shrink: 0;
+  }
+  .searchbar.open{ display: flex; animation: noteIn .25s ease both; }
+  .searchbar input{
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .searchbar input::placeholder{ color: var(--ink-3); }
+  .searchbar input::-webkit-search-cancel-button{ display: none; }
 
   /* ═══════════════ content ═══════════════ */
   .content{
@@ -190,8 +369,7 @@
     flex: 1;
     min-height: 0;
   }
-  .content > .deck,
-  .content > .notes-list{
+  .view{
     position: absolute;
     inset: 0;
     opacity: 0;
@@ -199,174 +377,146 @@
     pointer-events: none;
     transition: opacity .22s ease, visibility 0s linear .22s;
   }
-  .content > .deck.active,
-  .content > .notes-list.active{
+  .view.active{
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transition: opacity .22s ease, visibility 0s;
   }
 
-  /* ═══════════════ deck ═══════════════ */
-  .deck{ touch-action: pan-y; }
+  .scroll{
+    margin: 0;
+    padding: 2px 2px 24px 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, .3) transparent;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
+  }
+  .scroll::-webkit-scrollbar{ width: 6px; }
+  .scroll::-webkit-scrollbar-thumb{
+    background: rgba(128, 128, 128, .3);
+    border-radius: 99px;
+  }
+  .scroll::-webkit-scrollbar-track{ background: transparent; }
 
-  .card{
-    position: absolute;
-    inset: 0;
+  .notes-list{
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 22px;
-    border-radius: 24px;
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    box-shadow: var(--shadow-card);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    backdrop-filter: blur(24px) saturate(180%);
-    transition: transform .5s cubic-bezier(.22,1,.36,1), opacity .35s ease, box-shadow .3s;
-    will-change: transform, opacity;
-    overflow: hidden;
+    gap: 8px;
   }
 
-  .card[data-pos="0"]{
-    transform: translateY(0) scale(1) rotate(0deg);
-    opacity: 1;
-    z-index: 3;
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.03),
-      0 12px 32px -12px rgba(0, 0, 0, 0.10),
-      0 32px 64px -32px rgba(180, 83, 9, 0.09),
-      inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  }
-  .card[data-pos="1"]{ transform: translateY(14px) scale(.94) rotate(1.5deg); opacity: .5; z-index: 2; pointer-events: none; }
-  .card[data-pos="2"]{ transform: translateY(28px) scale(.88) rotate(-1.5deg); opacity: .22; z-index: 1; pointer-events: none; }
-  .card[data-pos="-1"]{ transform: translateY(-60px) scale(.9) rotate(-3deg); opacity: 0; z-index: 4; pointer-events: none; }
-
-  .card.entering-back{ animation: enterBack .4s cubic-bezier(.22,1,.36,1) both; }
-  @keyframes enterBack{
-    from{ opacity: 0; transform: translateY(60px) scale(.75) rotate(0deg); }
-    to  { opacity: .22; transform: translateY(28px) scale(.88) rotate(-1.5deg); }
-  }
-
-  .card.leaving-up{
-    transform: translateY(-70px) scale(.85) rotate(-4deg) !important;
-    opacity: 0 !important;
-    z-index: 5;
-    pointer-events: none;
-    transition: transform .4s cubic-bezier(.4,0,1,1), opacity .35s ease;
-  }
-
-  .card.leaving-back{
-    transform: translateY(80px) scale(.7) rotate(4deg) !important;
-    opacity: 0 !important;
-    z-index: 5;
-    pointer-events: none;
-    transition: transform .4s cubic-bezier(.4,0,1,1), opacity .35s ease;
-  }
-
-  .card-head{ display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-  .card-num{
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .12em;
-    color: var(--copper);
-    font-variant-numeric: tabular-nums;
-  }
-  .card-del{
-    width: 30px; height: 30px;
-    border: 0; background: transparent;
-    border-radius: 8px;
-    cursor: pointer;
-    display: grid; place-items: center;
-    color: var(--ink-3);
-    opacity: .6;
-    margin-right: -4px;
-    transition: opacity .15s, color .15s, background .15s, transform .1s;
-  }
-  .card-del:hover{ opacity: 1; color: #b91c1c; background: rgba(185, 28, 28, .08); }
-  .card-del:active{ transform: scale(.92); }
-
-  .card-body{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    min-height: 0;
-    padding: 8px 0;
-  }
-  .card-text{
+  /* ═══════════════ tarefas · cards estilo Keep ═══════════════ */
+  .keep-grid{
+    list-style: none;
     margin: 0;
-    font-family: 'Manrope', system-ui, sans-serif;
-    font-size: 24px;
-    line-height: 1.22;
-    letter-spacing: -.025em;
+    padding: 0;
+    column-count: 2;
+    column-gap: 10px;
+  }
+
+  .kcard{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 14px 12px 8px 14px;
+    border-radius: 16px;
+    background: var(--t0);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-item);
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    animation: noteIn .35s cubic-bezier(.22,1,.36,1) both;
+    transition: background .2s, border-color .18s, box-shadow .18s, opacity .2s;
+  }
+  .kcard.t0{ background: var(--t0); }
+  .kcard.t1{ background: var(--t1); }
+  .kcard.t2{ background: var(--t2); }
+  .kcard.t3{ background: var(--t3); }
+  .kcard.t4{ background: var(--t4); }
+  .kcard.no-anim{ animation: none; }
+  .kcard:hover{ border-color: var(--card-border-strong); }
+  .kcard.important{ border-left: 3px solid var(--copper); padding-left: 12px; }
+  .kcard-text{
+    margin: 0;
+    min-height: 36px;
+    font-size: 15.5px;
+    line-height: 1.38;
     font-weight: 600;
+    letter-spacing: -.012em;
     color: var(--ink);
     overflow-wrap: anywhere;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    transition: color .25s, text-decoration-color .25s;
+    white-space: pre-wrap;
+    cursor: pointer;
   }
-  .card.done .card-text{
+  .kcard-foot{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: -4px;
+    margin-right: -6px;
+  }
+  .kcard-tools{ display: flex; }
+  .kcard .note-action{ width: 28px; height: 28px; }
+  .kcard.important .note-action[data-action="star-task"]{ opacity: 1; color: var(--copper); }
+  .kcard.done{
+    background: var(--surface-2);
+    box-shadow: none;
+  }
+  .kcard.done .kcard-text{
     text-decoration: line-through;
-    text-decoration-thickness: 2px;
-    text-decoration-color: rgba(163, 163, 163, .7);
+    text-decoration-thickness: 1.5px;
+    text-decoration-color: rgba(163, 163, 163, .8);
     color: var(--ink-3);
+    font-weight: 500;
+  }
+  .kcard.removing{
+    animation: noteOut .22s ease forwards;
+    pointer-events: none;
+  }
+  .kcard.done .shop-check{
+    background: var(--forest);
+    border-color: var(--forest);
+    color: #fff;
   }
 
-  .card-done{
-    height: 52px;
-    flex-shrink: 0;
-    border: 0;
-    border-radius: 14px;
-    background: var(--copper);
-    color: #fff;
-    font: 600 15px/1 inherit;
-    letter-spacing: -.005em;
-    cursor: pointer;
+  .due{
+    align-self: flex-start;
+    padding: 3px 9px;
+    border-radius: 99px;
+    background: var(--hover);
+    color: var(--ink-2);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .03em;
+    text-transform: capitalize;
+  }
+  .due.today{ background: var(--copper-soft); color: var(--copper); }
+  .due.overdue{ background: var(--danger-bg); color: var(--danger); }
+  .due.soon{ background: var(--forest-soft); color: var(--ink-2); }
+
+  .allclear{
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow:
-      0 1px 2px rgba(146, 64, 14, .28),
-      0 4px 12px -4px rgba(146, 64, 14, .35);
-    transition: background .2s, transform .1s, box-shadow .2s;
+    margin: 0 0 12px;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--forest-soft);
+    color: var(--ink-2);
+    font-size: 13.5px;
+    font-weight: 700;
+    animation: noteIn .4s ease both;
   }
-  .card-done:hover{ background: var(--copper-2); }
-  .card-done:active{ transform: scale(.98); box-shadow: 0 1px 2px rgba(146, 64, 14, .28); }
-  .card-done svg{ flex-shrink: 0; }
-  .card.done .card-done{
-    background: var(--forest);
-    box-shadow:
-      0 1px 2px rgba(63, 74, 46, .28),
-      0 4px 12px -4px rgba(63, 74, 46, .35);
-  }
-  .card.done .card-done:hover{ background: var(--forest-2); }
+  .allclear svg{ color: var(--forest); }
 
-  /* ═══════════════ notas + compras (lista) ═══════════════ */
-  .notes-list{
-    list-style: none;
-    margin: 0;
-    padding: 2px 2px 68px 0;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, .14) transparent;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
-    mask-image: linear-gradient(180deg, transparent 0, black 12px, black calc(100% - 12px), transparent 100%);
-  }
-  .notes-list::-webkit-scrollbar{ width: 6px; }
-  .notes-list::-webkit-scrollbar-thumb{
-    background: rgba(0, 0, 0, .14);
-    border-radius: 99px;
-  }
-  .notes-list::-webkit-scrollbar-track{ background: transparent; }
-
+  /* ═══════════════ notas ═══════════════ */
   .note{
     display: flex;
     align-items: stretch;
@@ -381,16 +531,10 @@
     animation: noteIn .35s cubic-bezier(.22,1,.36,1) both;
     transition: border-color .18s, box-shadow .18s;
   }
-  .note:hover{
-    border-color: var(--card-border-strong);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, .03),
-      0 6px 18px -6px rgba(0, 0, 0, .08),
-      inset 0 1px 0 rgba(255, 255, 255, .95);
-  }
+  .note:hover{ border-color: var(--card-border-strong); }
   .note.pinned{
-    border-color: rgba(180, 83, 9, .22);
-    background: linear-gradient(180deg, rgba(255, 253, 250, 0.92), rgba(255, 251, 244, 0.85));
+    border-color: rgba(180, 83, 9, .28);
+    background: var(--pin-bg);
   }
 
   @keyframes noteIn{
@@ -422,7 +566,7 @@
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
     justify-content: center;
   }
   .note-text{
@@ -434,11 +578,13 @@
     letter-spacing: -.005em;
     color: var(--ink);
     overflow-wrap: anywhere;
+    white-space: pre-wrap;
   }
   .note-meta{
     display: flex;
     align-items: center;
-    gap: 6px;
+    flex-wrap: wrap;
+    gap: 8px;
     font-size: 10.5px;
     font-weight: 600;
     letter-spacing: .04em;
@@ -450,6 +596,19 @@
     display: inline-flex;
     align-items: center;
     gap: 3px;
+  }
+  .tag{
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--copper-soft);
+    color: var(--copper);
+    font-weight: 700;
+  }
+  .price{
+    color: var(--ink-2);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
   }
 
   .note-actions{
@@ -469,20 +628,22 @@
     display: grid;
     place-items: center;
     color: var(--ink-3);
-    opacity: .6;
+    opacity: .75;
     transition: opacity .15s, color .15s, background .15s, transform .1s;
   }
-  .note-action:hover{ opacity: 1; color: var(--ink-2); background: rgba(0, 0, 0, .05); }
+  .note-action:hover{ opacity: 1; color: var(--ink-2); background: var(--hover); }
   .note-action:active{ transform: scale(.9); }
-  .note-action[data-action="pin"]:hover{ color: var(--copper); background: rgba(180, 83, 9, .08); }
+  .note-action[data-action="pin"]:hover,
+  .note-action[data-action="star-task"]:hover{ color: var(--copper); background: var(--copper-soft); }
   .note-action[data-action="delete-note"]:hover,
-  .note-action[data-action="delete-shop"]:hover{ color: #b91c1c; background: rgba(185, 28, 28, .08); }
+  .note-action[data-action="delete-item"]:hover,
+  .note-action[data-action="delete-task"]:hover{ color: var(--danger); background: var(--danger-bg); }
   .note.pinned .note-action[data-action="pin"]{
     opacity: 1;
     color: var(--copper);
   }
 
-  /* ─── compras ─── */
+  /* ─── compras / prendas (checklist) ─── */
   .shop-item{
     align-items: center;
     padding: 10px 8px 10px 12px;
@@ -494,7 +655,7 @@
     flex-shrink: 0;
     border: 1.8px solid var(--ink-4);
     border-radius: 50%;
-    background: #fff;
+    background: var(--surface);
     color: transparent;
     cursor: pointer;
     display: grid;
@@ -511,7 +672,7 @@
   }
   .shop-item .note-body{ cursor: pointer; }
   .shop-item.bought{
-    background: rgba(255, 255, 255, .55);
+    background: var(--surface-2);
     box-shadow: none;
   }
   .shop-item.bought .note-text{
@@ -522,7 +683,7 @@
   }
   .shop-sep{
     list-style: none;
-    margin: 6px 2px 0;
+    margin: 8px 2px 2px;
     font-size: 10.5px;
     font-weight: 700;
     letter-spacing: .1em;
@@ -533,10 +694,15 @@
     justify-content: space-between;
     gap: 8px;
   }
+  .shop-sep:first-child{ margin-top: 2px; }
+  div.shop-sep{ margin: 6px 2px 10px; }
   .shop-clear{
     border: 0;
     background: transparent;
-    font: 700 10.5px/1 'Manrope', system-ui, sans-serif;
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 1;
     letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--copper);
@@ -545,7 +711,35 @@
     border-radius: 8px;
     transition: background .15s;
   }
-  .shop-clear:hover{ background: rgba(180, 83, 9, .08); }
+  .shop-clear:hover{ background: var(--copper-soft); }
+
+  .summary{
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-item);
+  }
+  .summary div{ flex: 1; }
+  .summary small{
+    display: block;
+    margin-bottom: 2px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .summary strong{
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .summary .accent strong{ color: var(--copper); }
 
   .notes-empty{
     padding: 60px 20px 40px;
@@ -559,10 +753,9 @@
     list-style: none;
   }
   @keyframes fadeIn{ from{opacity: 0} to{opacity: 1} }
-  .notes-empty .empty-icon{ color: rgba(180, 83, 9, .32); margin-bottom: 4px; }
+  .notes-empty .empty-icon{ color: var(--copper); opacity: .4; margin-bottom: 4px; }
   .notes-empty .empty-title{
     margin: 0;
-    font-family: 'Manrope', system-ui, sans-serif;
     font-size: 17px;
     font-weight: 700;
     letter-spacing: -.015em;
@@ -576,46 +769,38 @@
     line-height: 1.55;
   }
 
-  /* ═══════════════ nav ═══════════════ */
-  .nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+  /* ═══════════════ chips rápidas ═══════════════ */
+  .chips{
+    display: none;
+    gap: 6px;
     flex-shrink: 0;
+    overflow-x: auto;
+    margin: -2px -20px -2px;
+    padding: 2px 20px;
+    scrollbar-width: none;
   }
-  .nav-btn{
-    width: 44px;
-    height: 44px;
-    border: 1px solid var(--card-border);
-    border-radius: 50%;
+  .chips::-webkit-scrollbar{ display: none; }
+  .chip{
+    flex-shrink: 0;
+    height: 32px;
+    padding: 0 13px;
+    border-radius: 99px;
+    border: 1px solid var(--card-border-strong);
     background: var(--card);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    backdrop-filter: blur(20px) saturate(180%);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
     color: var(--ink-2);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, .03),
-      0 4px 12px -4px rgba(0, 0, 0, .05);
-    transition: background .15s, color .15s, transform .1s, opacity .2s, border-color .15s;
-  }
-  .nav-btn:hover:not(:disabled){
-    background: #ffffff;
-    color: var(--ink);
-    border-color: var(--card-border-strong);
-  }
-  .nav-btn:active:not(:disabled){ transform: scale(.94); }
-  .nav-btn:disabled{ opacity: .35; cursor: default; }
-  .nav-info{
-    flex: 1;
-    text-align: center;
-    font-size: 12.5px;
+    font-family: inherit;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--ink-3);
-    font-variant-numeric: tabular-nums;
     letter-spacing: -.005em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s, color .15s, border-color .15s, transform .1s;
+  }
+  .chip:active{ transform: scale(.95); }
+  .chip.on{
+    background: var(--copper);
+    border-color: var(--copper);
+    color: #fff;
   }
 
   /* ═══════════════ form ═══════════════ */
@@ -631,18 +816,17 @@
     box-shadow:
       0 1px 2px rgba(0, 0, 0, .03),
       0 6px 18px -6px rgba(0, 0, 0, .05),
-      inset 0 1px 0 rgba(255, 255, 255, .95);
+      inset 0 1px 0 var(--inset-hi);
     transition: border-color .2s, box-shadow .2s;
     flex-shrink: 0;
   }
   .add:focus-within{
-    border-color: rgba(180, 83, 9, .35);
+    border-color: rgba(180, 83, 9, .4);
     box-shadow:
       0 1px 2px rgba(0, 0, 0, .03),
       0 6px 18px -6px rgba(0, 0, 0, .05),
-      0 0 0 4px rgba(180, 83, 9, .10),
-      0 8px 24px -8px rgba(180, 83, 9, .15),
-      inset 0 1px 0 rgba(255, 255, 255, .95);
+      0 0 0 4px var(--copper-soft),
+      inset 0 1px 0 var(--inset-hi);
   }
   .add input{
     flex: 1;
@@ -652,7 +836,9 @@
     border: 0;
     background: transparent;
     outline: none;
-    font: 500 15px/1 inherit;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
     letter-spacing: -.005em;
     color: var(--ink);
   }
@@ -676,7 +862,7 @@
   .add button:hover{ background: var(--copper-2); }
   .add button:active{ transform: scale(.95); }
 
-  /* ═══════════════ empty state ═══════════════ */
+  /* ═══════════════ empty state (tarefas) ═══════════════ */
   .empty-state{
     position: absolute;
     inset: 0;
@@ -687,16 +873,15 @@
     gap: 12px;
     padding: 32px;
     border-radius: 24px;
-    background: rgba(255, 255, 255, .5);
-    border: 2px dashed rgba(180, 83, 9, .22);
+    background: var(--empty-bg);
+    border: 2px dashed rgba(180, 83, 9, .26);
     color: var(--ink-3);
     text-align: center;
     animation: fadeIn .4s ease both;
   }
-  .empty-state .empty-icon{ color: rgba(180, 83, 9, .32); margin-bottom: 4px; }
+  .empty-state .empty-icon{ color: var(--copper); opacity: .4; margin-bottom: 4px; }
   .empty-state .empty-title{
     margin: 0;
-    font-family: 'Manrope', system-ui, sans-serif;
     font-size: 17px;
     font-weight: 700;
     color: var(--ink-2);
@@ -716,7 +901,9 @@
     border-radius: 12px;
     background: var(--copper);
     color: #fff;
-    font: 600 14px/1 inherit;
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
     letter-spacing: -.005em;
     cursor: pointer;
     box-shadow:
@@ -745,6 +932,209 @@
     letter-spacing: .14em;
     margin-left: 4px;
   }
+
+  /* ═══════════════ bottom sheet ═══════════════ */
+  .sheet-backdrop{
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 10, .42);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility 0s linear .25s;
+    z-index: 9000;
+  }
+  .sheet-backdrop.open{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .25s ease, visibility 0s;
+  }
+  .sheet{
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    width: min(100vw, 400px);
+    max-height: 88dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 10px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+    border-radius: 26px 26px 0 0;
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: 0 -12px 40px -8px rgba(0, 0, 0, .3);
+    transform: translate(-50%, 105%);
+    visibility: hidden;
+    outline: none;
+    transition: transform .38s cubic-bezier(.22,1,.36,1), visibility 0s linear .38s;
+    z-index: 9001;
+  }
+  .sheet.open{
+    transform: translate(-50%, 0);
+    visibility: visible;
+    transition: transform .38s cubic-bezier(.22,1,.36,1), visibility 0s;
+  }
+  .sheet-grab{
+    width: 38px;
+    height: 4px;
+    margin: 0 auto 8px;
+    border-radius: 99px;
+    background: var(--ink-4);
+  }
+  .sheet-title{
+    margin: 6px 0 16px;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -.025em;
+  }
+  .sheet-actions{ display: flex; gap: 8px; margin-top: 8px; }
+  .btn{
+    flex: 1;
+    height: 48px;
+    border: 0;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.005em;
+    cursor: pointer;
+    transition: transform .1s, background .2s;
+  }
+  .btn:active{ transform: scale(.98); }
+  .btn-ghost{ background: var(--seg); color: var(--ink-2); }
+  .btn-primary{ background: var(--copper); color: #fff; }
+  .btn-primary:hover{ background: var(--copper-2); }
+
+  .field{ margin-bottom: 14px; }
+  .field-label{
+    display: block;
+    margin: 0 0 6px 2px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .field-input{
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--card-border-strong);
+    border-radius: 12px;
+    background: var(--seg);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -.005em;
+    outline: none;
+    resize: none;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .field-input:focus{
+    border-color: rgba(180, 83, 9, .5);
+    box-shadow: 0 0 0 3px var(--copper-soft);
+  }
+  textarea.field-input{ min-height: 88px; line-height: 1.4; }
+  .chip-row{ display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .color-row{ display: flex; gap: 10px; }
+  .dot{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: var(--c);
+    box-shadow: inset 0 0 0 2.5px var(--surface);
+    cursor: pointer;
+    padding: 0;
+    transition: transform .1s, border-color .15s;
+  }
+  .dot:active{ transform: scale(.9); }
+  .dot.on{ border-color: var(--ink); }
+
+  .row-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 13px 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    background: var(--seg);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  .row-btn:active{ transform: scale(.99); }
+  .row-btn small{
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+  .row-btn.danger{ color: var(--danger); }
+  .row-static{ cursor: default; }
+  .row-static:active{ transform: none; }
+
+  .seg{
+    display: flex;
+    gap: 2px;
+    padding: 3px;
+    border-radius: 11px;
+    background: var(--seg);
+  }
+  .seg-btn{
+    flex: 1;
+    height: 34px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink-2);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .seg-btn.on{
+    background: var(--surface);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .12);
+  }
+  .switch{
+    position: relative;
+    width: 46px;
+    height: 28px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 99px;
+    background: var(--ink-4);
+    cursor: pointer;
+    transition: background .2s;
+  }
+  .switch::after{
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+    transition: transform .2s cubic-bezier(.22,1,.36,1);
+  }
+  .switch[aria-checked="true"]{ background: var(--forest); }
+  .switch[aria-checked="true"]::after{ transform: translateX(18px); }
 
   /* ═══════════════ toast ═══════════════ */
   .toast{
@@ -796,6 +1186,29 @@
   .toast-action:hover{ opacity: .8; }
   .toast-action:active{ opacity: .6; }
 
+  /* ═══════════════ confetti ═══════════════ */
+  .confetti{
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 9998;
+  }
+  .confetti span{
+    position: absolute;
+    top: -14px;
+    left: var(--x);
+    width: 8px;
+    height: 13px;
+    border-radius: 2px;
+    animation: fall var(--d) var(--del) cubic-bezier(.25,.6,.4,1) both;
+  }
+  @keyframes fall{
+    0%  { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+    85% { opacity: 1; }
+    100%{ opacity: 0; transform: translate(var(--dx), 105vh) rotate(var(--r)); }
+  }
+
   :focus-visible{
     outline: 2px solid var(--copper);
     outline-offset: 2px;
@@ -803,16 +1216,17 @@
   }
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
-    .card,
     .note,
-    .nav-btn,
-    .add{ background: #ffffff; }
+    .add,
+    .summary{ background: var(--surface); }
   }
 
   @media (prefers-reduced-motion: reduce){
-    .card,
+    .kcard,
     .note,
     .toast,
+    .sheet,
+    .sheet-backdrop,
     .progress-fill{
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
@@ -825,7 +1239,25 @@
 <main class="app">
 
   <header class="top">
-    <p class="eyebrow" id="eyebrow"></p>
+    <div class="eyebrow-row">
+      <p class="eyebrow" id="eyebrow"></p>
+      <div class="icon-group">
+        <button type="button" class="icon-btn" id="searchBtn" aria-label="Pesquisar" aria-pressed="false">
+          <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="icon-btn" id="settingsBtn" aria-label="Definições">
+          <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2.5 4.5h4.6M10.9 4.5h2.6M2.5 8h2.2M8.3 8h5.2M2.5 11.5h5.4M11.7 11.5h1.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="9" cy="4.5" r="1.7" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="6.5" cy="8" r="1.7" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="9.8" cy="11.5" r="1.7" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
     <div class="top-row">
       <h1 class="title">Não <span class="title-accent">Esquecer</span></h1>
       <div class="counter" id="counter">0 / 0</div>
@@ -841,6 +1273,7 @@
           <rect x="3" y="10.2" width="6" height="1.8" rx=".9" fill="currentColor" opacity=".4"/>
         </svg>
         <span>Tarefas</span>
+        <span class="badge" data-badge="tasks"></span>
       </button>
       <button type="button" class="mode-tab" data-mode="notes" aria-pressed="false">
         <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
@@ -856,29 +1289,41 @@
           <circle cx="11.4" cy="12.6" r="1" fill="currentColor"/>
         </svg>
         <span>Compras</span>
+        <span class="badge" data-badge="shop"></span>
+      </button>
+      <button type="button" class="mode-tab" data-mode="gifts" aria-pressed="false">
+        <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+          <rect x="2.5" y="5.5" width="11" height="2.6" rx=".7" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M3.5 8.1v5a.7.7 0 00.7.7h7.6a.7.7 0 00.7-.7v-5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M8 5.5v8.3" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          <path d="M8 5.5C6.2 5.5 5 4.6 5.5 3.7 6.4 2.7 8 4.1 8 5.5zM8 5.5c1.8 0 3-.9 2.5-1.8C9.6 2.7 8 4.1 8 5.5z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+        <span>Prendas</span>
+        <span class="badge" data-badge="gifts"></span>
       </button>
     </nav>
+    <div class="searchbar" id="searchBar">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input id="searchInput" type="search" placeholder="Pesquisar…" autocomplete="off" aria-label="Pesquisar">
+      <button type="button" class="icon-btn" id="searchClose" aria-label="Fechar pesquisa">
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+          <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <div class="content">
-    <div class="deck active" id="deck"></div>
-    <ul class="notes-list" id="notesList"></ul>
-    <ul class="notes-list" id="shopList"></ul>
+    <div class="view scroll active" id="taskView"></div>
+    <ul class="view scroll notes-list" id="notesList"></ul>
+    <ul class="view scroll notes-list" id="shopList"></ul>
+    <ul class="view scroll notes-list" id="giftList"></ul>
   </div>
 
-  <nav class="nav" id="nav" aria-label="Navegação">
-    <button type="button" class="nav-btn" id="prevBtn" aria-label="Anterior" disabled>
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-        <path d="M10 3L4 8l6 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <span class="nav-info" id="navInfo">Sem tarefas</span>
-    <button type="button" class="nav-btn" id="nextBtn" aria-label="Próxima" disabled>
-      <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-        <path d="M6 3l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-  </nav>
+  <div class="chips" id="chips" role="group" aria-label="Atalhos rápidos"></div>
 
   <form class="add" id="addForm" autocomplete="off">
     <label for="input" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Nova entrada</label>
@@ -894,6 +1339,17 @@
 
 </main>
 
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" tabindex="-1">
+  <div class="sheet-grab"></div>
+  <h2 class="sheet-title" id="sheetTitle">Editar</h2>
+  <div id="sheetBody"></div>
+  <div class="sheet-actions">
+    <button type="button" class="btn btn-ghost" id="sheetCancel">Cancelar</button>
+    <button type="button" class="btn btn-primary" id="sheetSave">Guardar</button>
+  </div>
+</section>
+
 <div class="toast" id="toast" role="status" aria-live="polite">
   <span class="toast-msg" id="toastMsg"></span>
   <button type="button" class="toast-action" id="toastAction">Desfazer</button>
@@ -905,32 +1361,155 @@
 
   var STORAGE_KEY = 'nao-esquecer-v3';
   var NOTE_COLORS = ['#b45309', '#4a5240', '#a16207', '#c2410c', '#7c2d12'];
-  var MODES = ['tasks', 'notes', 'shop'];
+  var MODES = ['tasks', 'notes', 'shop', 'gifts'];
+  var DEFAULT_SUG = []; /* sem sugestões pré-feitas: só aparecem as que tu fores usando */
+  var TITLES = { tasks: 'Tarefas', notes: 'Notas', shop: 'Lista de compras', gifts: 'Prendas' };
 
   var state = {
     mode: 'tasks',
-    tasks: [],
-    notes: [],
-    shop: [],
-    taskNext: 1,
-    noteNext: 1,
-    shopNext: 1
+    tasks: [], notes: [], shop: [], gifts: [], history: [],
+    taskNext: 1, noteNext: 1, shopNext: 1, giftNext: 1,
+    settings: { theme: 'auto', haptics: true }
   };
+
+  /* atalhos aplicados à próxima tarefa / prenda */
+  var quick = { important: false, due: '', person: '' };
+  var searchOpen = false;
+  var query = '';
+
+  /* ═══════════════ helpers ═══════════════ */
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function ymd(offset) {
+    var d = new Date();
+    d.setDate(d.getDate() + (offset || 0));
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+
+  function parseYmd(str) {
+    var p = String(str).split('-');
+    return new Date(+p[0], +p[1] - 1, +p[2]);
+  }
+
+  function dayDiff(str) {
+    var a = parseYmd(str);
+    var now = new Date();
+    var b = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.round((a - b) / 86400000);
+  }
+
+  function dueInfo(str, done) {
+    if (!str) return null;
+    var date = parseYmd(str);
+    if (isNaN(date.getTime())) return null;
+    var d = dayDiff(str);
+    var short = date.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short' }).replace('.', '');
+    if (done) return { label: short, cls: '' };
+    if (d < 0) return { label: 'Atrasada · ' + short, cls: 'overdue' };
+    if (d === 0) return { label: 'Hoje', cls: 'today' };
+    if (d === 1) return { label: 'Amanhã', cls: 'soon' };
+    if (d < 7) return { label: date.toLocaleDateString('pt-PT', { weekday: 'short' }).replace('.', ''), cls: '' };
+    return { label: short, cls: '' };
+  }
+
+  function fmtWhen(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    var now = new Date();
+    var diff = Math.round((new Date(now.getFullYear(), now.getMonth(), now.getDate()) -
+      new Date(d.getFullYear(), d.getMonth(), d.getDate())) / 86400000);
+    var t = pad(d.getHours()) + ':' + pad(d.getMinutes());
+    if (diff === 0) return 'Hoje, ' + t;
+    if (diff === 1) return 'Ontem, ' + t;
+    return d.toLocaleDateString('pt-PT', { day: 'numeric', month: 'short' }).replace('.', '');
+  }
+
+  function fmtEur(n) {
+    try {
+      return n.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+    } catch (e) {
+      return n.toFixed(2) + ' €';
+    }
+  }
+
+  function parsePrice(s) {
+    s = String(s || '').replace(',', '.').replace(/[^\d.]/g, '');
+    if (!s) return null;
+    var n = parseFloat(s);
+    return isFinite(n) && n >= 0 ? Math.round(n * 100) / 100 : null;
+  }
+
+  /* "Mãe – perfume 25€"  →  { person:'Mãe', text:'perfume', price:25 } */
+  function parseGift(raw) {
+    var text = raw.trim();
+    var price = null;
+    var person = '';
+
+    var pm = text.match(/(\d+(?:[.,]\d{1,2})?)\s*(€|euros?|eur)(?![a-zà-ú])/i);
+    if (pm) {
+      var stripped = (text.slice(0, pm.index) + ' ' + text.slice(pm.index + pm[0].length)).replace(/\s+/g, ' ').trim();
+      if (stripped) {
+        price = parsePrice(pm[1]);
+        text = stripped;
+      }
+    }
+
+    var nm = text.match(/^([^:–—]{1,30}?)\s*(?:[:–—]|\s-\s)\s*(.+)$/);
+    if (nm) {
+      person = nm[1].trim();
+      text = nm[2].trim();
+    }
+    return { text: text, person: person, price: price };
+  }
+
+  function buzz(p) {
+    if (!state.settings.haptics) return;
+    try { if (navigator.vibrate) navigator.vibrate(p); } catch (e) {}
+  }
+
+  function validItem(x) {
+    return x && typeof x === 'object' && typeof x.id === 'number' && typeof x.text === 'string';
+  }
+  function arr(v) { return Array.isArray(v) ? v.filter(validItem) : []; }
+  function nextId(list, n) {
+    var m = 0;
+    list.forEach(function (x) { if (x.id > m) m = x.id; });
+    return Math.max(m + 1, typeof n === 'number' ? n : 1);
+  }
+
+  function applyData(d) {
+    state.tasks = arr(d.tasks);
+    state.notes = arr(d.notes);
+    state.shop = arr(d.shop);
+    state.gifts = arr(d.gifts);
+    state.history = Array.isArray(d.history) ? d.history.filter(function (h) {
+      return h && typeof h.t === 'string' && typeof h.c === 'number';
+    }) : [];
+    state.taskNext = nextId(state.tasks, d.taskNext);
+    state.noteNext = nextId(state.notes, d.noteNext);
+    state.shopNext = nextId(state.shop, d.shopNext);
+    state.giftNext = nextId(state.gifts, d.giftNext);
+    state.mode = MODES.indexOf(d.mode) !== -1 ? d.mode : 'tasks';
+    if (d.settings && typeof d.settings === 'object') {
+      if (['auto', 'light', 'dark'].indexOf(d.settings.theme) !== -1) state.settings.theme = d.settings.theme;
+      if (typeof d.settings.haptics === 'boolean') state.settings.haptics = d.settings.haptics;
+    }
+  }
 
   /* recuperar + migrar de v1/v2 */
   try {
     var raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       var saved = JSON.parse(raw);
-      if (saved) {
-        state.tasks = Array.isArray(saved.tasks) ? saved.tasks : [];
-        state.notes = Array.isArray(saved.notes) ? saved.notes : [];
-        state.shop = Array.isArray(saved.shop) ? saved.shop : [];
-        state.taskNext = typeof saved.taskNext === 'number' ? saved.taskNext : 1;
-        state.noteNext = typeof saved.noteNext === 'number' ? saved.noteNext : 1;
-        state.shopNext = typeof saved.shopNext === 'number' ? saved.shopNext : 1;
-        state.mode = MODES.indexOf(saved.mode) !== -1 ? saved.mode : 'tasks';
-      }
+      if (saved && typeof saved === 'object') applyData(saved);
     } else {
       ['nao-esquecer-v2', 'nao-esquecer-v1'].forEach(function (key) {
         if (state.tasks.length) return;
@@ -939,37 +1518,49 @@
           if (!oldRaw) return;
           var old = JSON.parse(oldRaw);
           if (old && Array.isArray(old.tasks)) {
-            state.tasks = old.tasks;
-            state.taskNext = old.taskNext || 1;
+            state.tasks = arr(old.tasks);
+            state.taskNext = nextId(state.tasks, old.taskNext);
           } else if (old && Array.isArray(old.todos)) {
-            state.tasks = old.todos;
-            state.taskNext = old.next || 1;
+            state.tasks = arr(old.todos);
+            state.taskNext = nextId(state.tasks, old.next);
           }
         } catch (e) {}
       });
     }
   } catch (e) {}
 
-  var currentIndex = 0;
+  /* ═══════════════ elementos ═══════════════ */
 
-  var deckEl = document.getElementById('deck');
+  var taskViewEl = document.getElementById('taskView');
   var notesListEl = document.getElementById('notesList');
   var shopListEl = document.getElementById('shopList');
+  var giftListEl = document.getElementById('giftList');
   var eyebrowEl = document.getElementById('eyebrow');
   var counterEl = document.getElementById('counter');
-  var navEl = document.getElementById('nav');
-  var navInfoEl = document.getElementById('navInfo');
   var progressWrap = document.getElementById('progressWrap');
   var progressFillEl = document.getElementById('progressFill');
-  var prevBtn = document.getElementById('prevBtn');
-  var nextBtn = document.getElementById('nextBtn');
   var addForm = document.getElementById('addForm');
   var addBtn = document.getElementById('addBtn');
   var inputEl = document.getElementById('input');
   var modeTabs = document.getElementById('modeTabs');
+  var chipsEl = document.getElementById('chips');
+  var searchBar = document.getElementById('searchBar');
+  var searchInput = document.getElementById('searchInput');
+  var searchBtn = document.getElementById('searchBtn');
+  var searchClose = document.getElementById('searchClose');
+  var settingsBtn = document.getElementById('settingsBtn');
   var toast = document.getElementById('toast');
   var toastMsg = document.getElementById('toastMsg');
   var toastAction = document.getElementById('toastAction');
+  var sheetEl = document.getElementById('sheet');
+  var sheetBackdrop = document.getElementById('sheetBackdrop');
+  var sheetTitle = document.getElementById('sheetTitle');
+  var sheetBody = document.getElementById('sheetBody');
+  var sheetSave = document.getElementById('sheetSave');
+  var sheetCancel = document.getElementById('sheetCancel');
+  var themeColorEl = document.getElementById('themeColor');
+
+  /* ═══════════════ ícones ═══════════════ */
 
   var CHECK_SVG = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">' +
     '<path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="currentColor" stroke-width="2.2" ' +
@@ -978,6 +1569,17 @@
   var DEL_SVG = '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">' +
     '<path d="M3.5 3.5l7 7M10.5 3.5l-7 7" fill="none" stroke="currentColor" ' +
     'stroke-width="1.8" stroke-linecap="round"/></svg>';
+
+  var EDIT_SVG = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
+    '<path d="M10.6 2.9l2.5 2.5-7.4 7.4-3.1.6.6-3.1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
+
+  var STAR_SVG = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
+    '<path d="M8 2l1.8 3.8 4.1.5-3 2.9.8 4.1L8 11.2l-3.7 2.1.8-4.1-3-2.9 4.1-.5z" ' +
+    'stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>';
+
+  var STAR_FILLED_SVG = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">' +
+    '<path d="M8 2l1.8 3.8 4.1.5-3 2.9.8 4.1L8 11.2l-3.7 2.1.8-4.1-3-2.9 4.1-.5z" ' +
+    'fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>';
 
   var PIN_SVG = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
     '<path d="M10 2.5l3.5 3.5-1.7.9-2.9 2.9-.5 1.4-1.4.5.5-1.4 2.9-2.9.9-1.7z" ' +
@@ -1011,21 +1613,81 @@
     '<circle cx="20" cy="40" r="3" stroke="currentColor" stroke-width="2"/>' +
     '<circle cx="33" cy="40" r="3" stroke="currentColor" stroke-width="2"/></svg>';
 
+  var EMPTY_GIFT_SVG = '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+    '<rect x="8" y="18" width="36" height="9" rx="2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M11 27v15a2 2 0 002 2h26a2 2 0 002-2V27" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M26 18v26" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M26 18c-6 0-10-3-8.4-6C20.6 8.6 26 13.5 26 18zM26 18c6 0 10-3 8.4-6C31.4 8.6 26 13.5 26 18z" ' +
+    'stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+
+  var EMPTY_SEARCH_SVG = '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">' +
+    '<circle cx="23" cy="23" r="13" stroke="currentColor" stroke-width="2"/>' +
+    '<path d="M33 33l10 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>';
+
+  /* listas tipo checklist (compras + prendas) */
+  var LISTS = {
+    shop: {
+      el: shopListEl, next: 'shopNext', icon: EMPTY_SHOP_SVG,
+      title: 'Lista de compras vazia',
+      sub: 'Escreve o que falta comprar.<br>Os itens que usares ficam como atalhos.',
+      doneLabel: 'Comprados', unit: 'comprados',
+      placeholder: 'Adicionar à lista de compras…',
+      delMsg: 'Item apagado', editTitle: 'Editar item',
+      ariaOn: 'Marcar como comprado', ariaOff: 'Marcar como por comprar'
+    },
+    gifts: {
+      el: giftListEl, next: 'giftNext', icon: EMPTY_GIFT_SVG,
+      title: 'Sem prendas ainda',
+      sub: 'Escreve assim: <b>Mãe – perfume 25€</b><br>e eu separo a pessoa e o preço.',
+      doneLabel: 'Compradas', unit: 'compradas',
+      placeholder: 'Ex: Mãe – perfume 25€',
+      delMsg: 'Prenda apagada', editTitle: 'Editar prenda',
+      ariaOn: 'Marcar como comprada', ariaOff: 'Marcar como por comprar'
+    }
+  };
+
   /* ═══════════════ persistência ═══════════════ */
 
-  function save() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        tasks: state.tasks,
-        notes: state.notes,
-        shop: state.shop,
-        taskNext: state.taskNext,
-        noteNext: state.noteNext,
-        shopNext: state.shopNext,
-        mode: state.mode
-      }));
-    } catch (e) {}
+  function dataSnapshot() {
+    return {
+      tasks: state.tasks,
+      notes: state.notes,
+      shop: state.shop,
+      gifts: state.gifts,
+      history: state.history,
+      taskNext: state.taskNext,
+      noteNext: state.noteNext,
+      shopNext: state.shopNext,
+      giftNext: state.giftNext,
+      settings: state.settings,
+      mode: state.mode
+    };
   }
+
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(dataSnapshot())); } catch (e) {}
+  }
+
+  /* ═══════════════ tema ═══════════════ */
+
+  var darkMQ = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+  function applyTheme() {
+    var t = state.settings.theme;
+    var root = document.documentElement;
+    if (t === 'auto') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', t);
+    var dark = t === 'dark' || (t === 'auto' && darkMQ && darkMQ.matches);
+    themeColorEl.setAttribute('content', dark ? '#141210' : '#fdfdfc');
+  }
+
+  if (darkMQ) {
+    var onSchemeChange = function () { if (state.settings.theme === 'auto') applyTheme(); };
+    if (darkMQ.addEventListener) darkMQ.addEventListener('change', onSchemeChange);
+    else if (darkMQ.addListener) darkMQ.addListener(onSchemeChange);
+  }
+
+  applyTheme();
 
   /* ═══════════════ labels ═══════════════ */
 
@@ -1043,9 +1705,14 @@
 
   function dateLabel() {
     var d = new Date();
-    var day = d.getDate();
     var month = d.toLocaleDateString('pt-PT', { month: 'long' });
-    return day + ' de ' + month;
+    return d.getDate() + ' de ' + month;
+  }
+
+  function setEyebrow() {
+    eyebrowEl.innerHTML = timeGreeting() +
+      '<span class="sep">·</span>' +
+      weekdayLabel() + ', ' + dateLabel();
   }
 
   /* ═══════════════ toast ═══════════════ */
@@ -1080,271 +1747,407 @@
     hideToast();
   });
 
-  /* ═══════════════ tarefas ═══════════════ */
+  /* ═══════════════ confetti ═══════════════ */
 
-  function buildCard(todo, idx) {
-    var card = document.createElement('div');
-    card.className = 'card' + (todo.done ? ' done' : '');
-    card.dataset.id = String(todo.id);
-
-    var head = document.createElement('div');
-    head.className = 'card-head';
-
-    var num = document.createElement('span');
-    num.className = 'card-num';
-    num.textContent = String(idx + 1).padStart(2, '0');
-
-    var del = document.createElement('button');
-    del.type = 'button';
-    del.className = 'card-del';
-    del.dataset.action = 'delete';
-    del.setAttribute('aria-label', 'Apagar tarefa');
-    del.innerHTML = DEL_SVG;
-
-    head.appendChild(num);
-    head.appendChild(del);
-
-    var body = document.createElement('div');
-    body.className = 'card-body';
-    var text = document.createElement('p');
-    text.className = 'card-text';
-    text.textContent = todo.text;
-    body.appendChild(text);
-
-    var doneBtn = document.createElement('button');
-    doneBtn.type = 'button';
-    doneBtn.className = 'card-done';
-    doneBtn.dataset.action = 'toggle';
-    doneBtn.innerHTML = CHECK_SVG + '<span class="card-done-label">' +
-      (todo.done ? 'Concluída' : 'Concluir') + '</span>';
-
-    card.appendChild(head);
-    card.appendChild(body);
-    card.appendChild(doneBtn);
-
-    return card;
+  function celebrate() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var colors = ['#b45309', '#f59e0b', '#4a5240', '#fbbf24', '#c2410c'];
+    var wrap = el('div', 'confetti');
+    for (var i = 0; i < 38; i++) {
+      var s = document.createElement('span');
+      s.style.setProperty('--x', (Math.random() * 100) + 'vw');
+      s.style.setProperty('--dx', ((Math.random() - 0.5) * 180) + 'px');
+      s.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+      s.style.setProperty('--d', (1.4 + Math.random() * 1.3) + 's');
+      s.style.setProperty('--del', (Math.random() * 0.3) + 's');
+      s.style.background = colors[i % colors.length];
+      wrap.appendChild(s);
+    }
+    document.body.appendChild(wrap);
+    setTimeout(function () { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); }, 3400);
   }
 
-  function renderTasks() {
-    var total = state.tasks.length;
+  /* ═══════════════ pesquisa ═══════════════ */
 
-    if (total === 0) {
-      currentIndex = 0;
-      deckEl.innerHTML = '<div class="empty-state">' +
-        '<div class="empty-icon">' + EMPTY_TASK_SVG + '</div>' +
+  function q() { return query.trim().toLowerCase(); }
+
+  function matchItem(item) {
+    var s = q();
+    if (!s) return true;
+    return ((item.text || '') + ' ' + (item.person || '')).toLowerCase().indexOf(s) !== -1;
+  }
+
+  function searchEmpty(tag) {
+    var node = el(tag, 'notes-empty');
+    var ic = el('div', 'empty-icon');
+    ic.innerHTML = EMPTY_SEARCH_SVG;
+    node.appendChild(ic);
+    node.appendChild(el('p', 'empty-title', 'Nada encontrado'));
+    node.appendChild(el('p', 'empty-sub', 'Sem resultados para “' + query.trim() + '”.'));
+    return node;
+  }
+
+  function toggleSearch(force) {
+    searchOpen = typeof force === 'boolean' ? force : !searchOpen;
+    searchBar.classList.toggle('open', searchOpen);
+    searchBtn.classList.toggle('on', searchOpen);
+    searchBtn.setAttribute('aria-pressed', searchOpen ? 'true' : 'false');
+    if (searchOpen) {
+      searchInput.focus(); /* pedido explícito: toque na lupa */
+    } else {
+      query = '';
+      searchInput.value = '';
+      searchInput.blur();
+    }
+    refresh();
+  }
+
+  searchBtn.addEventListener('click', function () { toggleSearch(); });
+  searchClose.addEventListener('click', function () { toggleSearch(false); });
+  searchInput.addEventListener('input', function () {
+    query = searchInput.value;
+    refresh();
+  });
+
+  /* ═══════════════ bottom sheet ═══════════════ */
+
+  var sheetOpen = false;
+  var sheetOnSave = null;
+
+  function openSheet(opts) {
+    sheetTitle.textContent = opts.title;
+    sheetBody.innerHTML = '';
+    opts.build(sheetBody);
+    sheetOnSave = opts.onSave || null;
+    sheetSave.style.display = sheetOnSave ? '' : 'none';
+    sheetSave.textContent = opts.saveLabel || 'Guardar';
+    sheetCancel.textContent = sheetOnSave ? 'Cancelar' : 'Fechar';
+    sheetEl.scrollTop = 0;
+    sheetEl.classList.add('open');
+    sheetBackdrop.classList.add('open');
+    sheetOpen = true;
+    try { sheetEl.focus({ preventScroll: true }); } catch (e) {}
+  }
+
+  function closeSheet() {
+    sheetEl.classList.remove('open');
+    sheetBackdrop.classList.remove('open');
+    sheetOpen = false;
+    sheetOnSave = null;
+    if (document.activeElement && document.activeElement !== document.body) {
+      try { document.activeElement.blur(); } catch (e) {}
+    }
+  }
+
+  sheetBackdrop.addEventListener('click', closeSheet);
+  sheetCancel.addEventListener('click', closeSheet);
+  sheetSave.addEventListener('click', function () {
+    if (sheetOnSave) sheetOnSave();
+  });
+
+  function field(label, control) {
+    var wrap = el('div', 'field');
+    wrap.appendChild(el('span', 'field-label', label));
+    wrap.appendChild(control);
+    return wrap;
+  }
+
+  function makeTextarea(value, max) {
+    var ta = document.createElement('textarea');
+    ta.className = 'field-input';
+    ta.maxLength = max;
+    ta.value = value || '';
+    ta.rows = 3;
+    return ta;
+  }
+
+  function makeInput(value, type, placeholder, max) {
+    var inp = document.createElement('input');
+    inp.className = 'field-input';
+    inp.type = type || 'text';
+    inp.value = value || '';
+    if (placeholder) inp.placeholder = placeholder;
+    if (max) inp.maxLength = max;
+    return inp;
+  }
+
+  function makeChip(label, on, handler) {
+    var b = el('button', 'chip' + (on ? ' on' : ''), label);
+    b.type = 'button';
+    b.addEventListener('click', handler);
+    return b;
+  }
+
+  /* ═══════════════ tarefas (cards estilo Keep) ═══════════════ */
+
+  function findById(list, id) {
+    return list.filter(function (x) { return x.id === id; })[0];
+  }
+
+  function sortPending(list) {
+    return list.slice().sort(function (a, b) {
+      var ia = a.important ? 1 : 0;
+      var ib = b.important ? 1 : 0;
+      if (ia !== ib) return ib - ia;
+      var da = a.due || '9999-99-99';
+      var db = b.due || '9999-99-99';
+      return da < db ? -1 : da > db ? 1 : 0;
+    });
+  }
+
+  function actionBtn(action, label, svg) {
+    var b = el('button', 'note-action');
+    b.type = 'button';
+    b.dataset.action = action;
+    b.setAttribute('aria-label', label);
+    b.innerHTML = svg;
+    return b;
+  }
+
+  function buildTaskCard(task, animate) {
+    var li = el('li', 'kcard t' + (task.id % 5) +
+      (task.done ? ' done' : '') +
+      (task.important ? ' important' : '') +
+      (animate ? '' : ' no-anim'));
+    li.dataset.id = String(task.id);
+
+    var text = el('p', 'kcard-text', task.text);
+    text.dataset.action = 'toggle-task';
+    li.appendChild(text);
+
+    var di = dueInfo(task.due, task.done);
+    if (di) li.appendChild(el('span', 'due ' + di.cls, di.label));
+
+    var foot = el('div', 'kcard-foot');
+
+    var check = el('button', 'shop-check');
+    check.type = 'button';
+    check.dataset.action = 'toggle-task';
+    check.setAttribute('aria-label', task.done ? 'Marcar como por fazer' : 'Marcar como concluída');
+    check.innerHTML = CHECK_SVG;
+
+    var tools = el('div', 'kcard-tools');
+    tools.appendChild(actionBtn('star-task', task.important ? 'Remover importante' : 'Marcar importante',
+      task.important ? STAR_FILLED_SVG : STAR_SVG));
+    tools.appendChild(actionBtn('edit-task', 'Editar tarefa', EDIT_SVG));
+    tools.appendChild(actionBtn('delete-task', 'Apagar tarefa', DEL_SVG));
+
+    foot.appendChild(check);
+    foot.appendChild(tools);
+    li.appendChild(foot);
+    return li;
+  }
+
+  function renderTasks(animId) {
+    taskViewEl.innerHTML = '';
+
+    if (state.tasks.length === 0) {
+      var es = el('div', 'empty-state');
+      es.innerHTML = '<div class="empty-icon">' + EMPTY_TASK_SVG + '</div>' +
         '<p class="empty-title">Ainda nada aqui</p>' +
-        '<p class="empty-sub">Escreve a primeira coisa<br>que não queres esquecer</p>' +
-        '<button type="button" class="empty-btn" id="emptyFocusBtn">Adicionar tarefa</button>' +
-        '</div>';
-      var focusBtn = document.getElementById('emptyFocusBtn');
-      if (focusBtn) focusBtn.addEventListener('click', function () { inputEl.focus(); });
+        '<p class="empty-sub">Escreve a primeira coisa<br>que não queres esquecer</p>';
+      var focusBtn = el('button', 'empty-btn', 'Adicionar tarefa');
+      focusBtn.type = 'button';
+      focusBtn.addEventListener('click', function () { inputEl.focus(); });
+      es.appendChild(focusBtn);
+      taskViewEl.appendChild(es);
       return;
     }
 
-    if (currentIndex >= total) currentIndex = total - 1;
-    if (currentIndex < 0) currentIndex = 0;
-
-    deckEl.innerHTML = '';
-
-    for (var i = 2; i >= 0; i--) {
-      var idx = currentIndex + i;
-      if (idx >= total) continue;
-      var card = buildCard(state.tasks[idx], idx);
-      card.dataset.pos = String(i);
-      deckEl.appendChild(card);
-    }
-  }
-
-  function advance() {
-    var total = state.tasks.length;
-    if (total === 0 || currentIndex >= total - 1) return;
-
-    var current = deckEl.querySelector('.card[data-pos="0"]');
-    var pos1 = deckEl.querySelector('.card[data-pos="1"]');
-    var pos2 = deckEl.querySelector('.card[data-pos="2"]');
-
-    if (current) {
-      current.classList.add('leaving-up');
-      (function (el) {
-        setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 420);
-      })(current);
-    }
-    if (pos1) pos1.dataset.pos = '0';
-    if (pos2) pos2.dataset.pos = '1';
-
-    currentIndex++;
-
-    var newIdx = currentIndex + 2;
-    if (newIdx < total) {
-      var newCard = buildCard(state.tasks[newIdx], newIdx);
-      newCard.dataset.pos = '2';
-      newCard.classList.add('entering-back');
-      deckEl.appendChild(newCard);
-      setTimeout(function () { newCard.classList.remove('entering-back'); }, 450);
+    var visible = state.tasks.filter(matchItem);
+    if (!visible.length) {
+      taskViewEl.appendChild(searchEmpty('div'));
+      return;
     }
 
-    updateUI();
-  }
+    var pending = sortPending(visible.filter(function (t) { return !t.done; }));
+    var done = visible.filter(function (t) { return t.done; });
 
-  function retreat() {
-    var total = state.tasks.length;
-    if (total === 0 || currentIndex <= 0) return;
-
-    var current = deckEl.querySelector('.card[data-pos="0"]');
-    var pos1 = deckEl.querySelector('.card[data-pos="1"]');
-    var pos2 = deckEl.querySelector('.card[data-pos="2"]');
-
-    if (current) current.dataset.pos = '1';
-    if (pos1) pos1.dataset.pos = '2';
-    if (pos2) {
-      pos2.classList.add('leaving-back');
-      (function (el) {
-        setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 420);
-      })(pos2);
+    if (!pending.length && done.length && !q()) {
+      var banner = el('div', 'allclear');
+      banner.innerHTML = CHECK_SVG;
+      banner.appendChild(el('span', '', 'Tudo feito. Bom trabalho!'));
+      taskViewEl.appendChild(banner);
     }
 
-    currentIndex--;
-
-    var newCard = buildCard(state.tasks[currentIndex], currentIndex);
-    newCard.dataset.pos = '-1';
-    deckEl.appendChild(newCard);
-
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        newCard.dataset.pos = '0';
+    if (pending.length) {
+      var gridP = el('ul', 'keep-grid');
+      pending.forEach(function (t) {
+        gridP.appendChild(buildTaskCard(t, t.id === animId));
       });
-    });
-
-    updateUI();
-  }
-
-  function toggleTask() {
-    var total = state.tasks.length;
-    if (total === 0) return;
-
-    var current = state.tasks[currentIndex];
-    if (!current) return;
-
-    current.done = !current.done;
-    save();
-
-    var cardEl = deckEl.querySelector('.card[data-pos="0"]');
-    if (cardEl) {
-      if (current.done) cardEl.classList.add('done');
-      else cardEl.classList.remove('done');
-      var lbl = cardEl.querySelector('.card-done-label');
-      if (lbl) lbl.textContent = current.done ? 'Concluída' : 'Concluir';
+      taskViewEl.appendChild(gridP);
     }
 
-    updateUI();
+    if (done.length) {
+      var sep = el('div', 'shop-sep');
+      sep.appendChild(el('span', '', 'Concluídas · ' + done.length));
+      var clr = el('button', 'shop-clear', 'Limpar');
+      clr.type = 'button';
+      clr.dataset.action = 'clear-done';
+      sep.appendChild(clr);
+      taskViewEl.appendChild(sep);
 
-    if (current.done && currentIndex < total - 1) {
-      setTimeout(advance, 400);
+      var gridD = el('ul', 'keep-grid');
+      done.forEach(function (t) {
+        gridD.appendChild(buildTaskCard(t, false));
+      });
+      taskViewEl.appendChild(gridD);
     }
-  }
-
-  function removeTask() {
-    var total = state.tasks.length;
-    if (total === 0) return;
-
-    var current = state.tasks[currentIndex];
-    if (!current) return;
-
-    var deletedItem = current;
-    var deletedIndex = currentIndex;
-
-    var cardEl = deckEl.querySelector('.card[data-pos="0"]');
-    if (cardEl) cardEl.classList.add('leaving-back');
-
-    state.tasks.splice(deletedIndex, 1);
-    save();
-
-    setTimeout(function () {
-      if (currentIndex >= state.tasks.length && currentIndex > 0) {
-        currentIndex = state.tasks.length - 1;
-      }
-      renderTasks();
-      updateUI();
-    }, 380);
-
-    showToast('Tarefa apagada', 'Desfazer', function () {
-      state.tasks.splice(deletedIndex, 0, deletedItem);
-      currentIndex = deletedIndex;
-      save();
-      renderTasks();
-      updateUI();
-    });
   }
 
   function addTask(text) {
-    var todo = { id: state.taskNext, text: text, done: false };
+    var todo = {
+      id: state.taskNext,
+      text: text,
+      done: false,
+      important: quick.important,
+      due: quick.due || null
+    };
     state.taskNext += 1;
-
-    var insertAt = state.tasks.length === 0 ? 0 : currentIndex + 1;
-    state.tasks.splice(insertAt, 0, todo);
-    currentIndex = insertAt;
-
+    quick.important = false;
+    quick.due = '';
+    state.tasks.unshift(todo);
     save();
-    renderTasks();
-    updateUI();
+    refresh(todo.id);
+    taskViewEl.scrollTop = 0;
+    buzz(12);
+  }
+
+  function toggleTask(id) {
+    var t = findById(state.tasks, id);
+    if (!t) return;
+    t.done = !t.done;
+    save();
+    buzz(10);
+    refresh();
+    if (t.done && state.tasks.every(function (x) { return x.done; })) {
+      celebrate();
+      buzz([20, 40, 20]);
+    }
+  }
+
+  function starTask(id) {
+    var t = findById(state.tasks, id);
+    if (!t) return;
+    t.important = !t.important;
+    save();
+    buzz(8);
+    refresh();
+  }
+
+  function removeTask(id, elNode) {
+    var t = findById(state.tasks, id);
+    if (!t) return;
+
+    var deletedIndex = state.tasks.indexOf(t);
+    if (elNode) elNode.classList.add('removing');
+    state.tasks.splice(deletedIndex, 1);
+    save();
+    buzz(14);
+
+    setTimeout(function () { refresh(); }, 220);
+
+    showToast('Tarefa apagada', 'Desfazer', function () {
+      state.tasks.splice(Math.min(deletedIndex, state.tasks.length), 0, t);
+      save();
+      refresh();
+    });
+  }
+
+  function clearDoneTasks() {
+    var removed = state.tasks.filter(function (t) { return t.done; });
+    if (!removed.length) return;
+    var snapshot = state.tasks.slice();
+
+    state.tasks = state.tasks.filter(function (t) { return !t.done; });
+    save();
+    refresh();
+
+    showToast(removed.length === 1 ? '1 tarefa removida' : removed.length + ' tarefas removidas', 'Desfazer', function () {
+      state.tasks = snapshot;
+      save();
+      refresh();
+    });
+  }
+
+  function editTask(id) {
+    var t = findById(state.tasks, id);
+    if (!t) return;
+    var draft = { important: !!t.important };
+
+    openSheet({
+      title: 'Editar tarefa',
+      build: function (b) {
+        var ta = makeTextarea(t.text, 180);
+        b.appendChild(field('Tarefa', ta));
+
+        var starRow = el('div', 'chip-row');
+        var starChip = makeChip('★ Importante', draft.important, function () {
+          draft.important = !draft.important;
+          starChip.classList.toggle('on', draft.important);
+        });
+        starRow.appendChild(starChip);
+        b.appendChild(field('Prioridade', starRow));
+
+        var dateIn = makeInput(t.due || '', 'date');
+        var dueChips = [];
+        var dueRow = el('div', 'chip-row');
+        function syncDue() {
+          dueChips.forEach(function (c) { c.el.classList.toggle('on', c.val === dateIn.value); });
+        }
+        [['Sem prazo', ''], ['Hoje', ymd(0)], ['Amanhã', ymd(1)]].forEach(function (o) {
+          var c = makeChip(o[0], false, function () { dateIn.value = o[1]; syncDue(); });
+          dueChips.push({ el: c, val: o[1] });
+          dueRow.appendChild(c);
+        });
+        dateIn.addEventListener('input', syncDue);
+        syncDue();
+        var dueWrap = el('div', '');
+        dueWrap.appendChild(dueRow);
+        dueWrap.appendChild(dateIn);
+        b.appendChild(field('Prazo', dueWrap));
+      },
+      onSave: function () {
+        var ta = sheetBody.querySelector('textarea');
+        var dateIn = sheetBody.querySelector('input[type="date"]');
+        var val = ta.value.trim();
+        if (val) t.text = val;
+        t.important = draft.important;
+        t.due = dateIn.value || null;
+        save();
+        closeSheet();
+        refresh();
+      }
+    });
   }
 
   /* ═══════════════ notas ═══════════════ */
 
   function buildNote(note, idx) {
-    var li = document.createElement('li');
-    li.className = 'note' + (note.pinned ? ' pinned' : '');
+    var li = el('li', 'note' + (note.pinned ? ' pinned' : ''));
     li.dataset.id = String(note.id);
     li.style.setProperty('--note-color', note.color || NOTE_COLORS[idx % NOTE_COLORS.length]);
 
-    var accent = document.createElement('span');
-    accent.className = 'note-accent';
+    var accent = el('span', 'note-accent');
 
-    var body = document.createElement('div');
-    body.className = 'note-body';
+    var body = el('div', 'note-body');
+    body.appendChild(el('p', 'note-text', note.text));
 
-    var text = document.createElement('p');
-    text.className = 'note-text';
-    text.textContent = note.text;
-    body.appendChild(text);
-
+    var meta = el('div', 'note-meta');
     if (note.pinned) {
-      var meta = document.createElement('div');
-      meta.className = 'note-meta';
-      var tag = document.createElement('span');
-      tag.className = 'note-pin-tag';
+      var tag = el('span', 'note-pin-tag');
       tag.innerHTML = PIN_FILLED_SVG + '<span>Fixada</span>';
       meta.appendChild(tag);
-      body.appendChild(meta);
     }
+    if (note.createdAt) meta.appendChild(el('span', '', fmtWhen(note.createdAt)));
+    if (meta.childNodes.length) body.appendChild(meta);
 
-    var actions = document.createElement('div');
-    actions.className = 'note-actions';
-
-    var pinBtn = document.createElement('button');
-    pinBtn.type = 'button';
-    pinBtn.className = 'note-action';
-    pinBtn.dataset.action = 'pin';
-    pinBtn.setAttribute('aria-label', note.pinned ? 'Desafixar nota' : 'Fixar nota');
-    pinBtn.innerHTML = note.pinned ? PIN_FILLED_SVG : PIN_SVG;
-
-    var copyBtn = document.createElement('button');
-    copyBtn.type = 'button';
-    copyBtn.className = 'note-action';
-    copyBtn.dataset.action = 'copy';
-    copyBtn.setAttribute('aria-label', 'Copiar nota');
-    copyBtn.innerHTML = COPY_SVG;
-
-    var delBtn = document.createElement('button');
-    delBtn.type = 'button';
-    delBtn.className = 'note-action';
-    delBtn.dataset.action = 'delete-note';
-    delBtn.setAttribute('aria-label', 'Apagar nota');
-    delBtn.innerHTML = DEL_SVG;
-
-    actions.appendChild(pinBtn);
-    actions.appendChild(copyBtn);
-    actions.appendChild(delBtn);
+    var actions = el('div', 'note-actions');
+    actions.appendChild(actionBtn('pin', note.pinned ? 'Desafixar nota' : 'Fixar nota',
+      note.pinned ? PIN_FILLED_SVG : PIN_SVG));
+    actions.appendChild(actionBtn('edit-note', 'Editar nota', EDIT_SVG));
+    actions.appendChild(actionBtn('copy', 'Copiar nota', COPY_SVG));
+    actions.appendChild(actionBtn('delete-note', 'Apagar nota', DEL_SVG));
 
     li.appendChild(accent);
     li.appendChild(body);
@@ -1373,7 +2176,13 @@
       return;
     }
 
-    sortedNotes().forEach(function (note, idx) {
+    var list = sortedNotes().filter(matchItem);
+    if (!list.length) {
+      notesListEl.appendChild(searchEmpty('li'));
+      return;
+    }
+
+    list.forEach(function (note, idx) {
       var li = buildNote(note, idx);
       li.style.animationDelay = Math.min(idx * 25, 200) + 'ms';
       notesListEl.appendChild(li);
@@ -1392,55 +2201,46 @@
 
     state.notes.unshift(note);
     save();
-
-    renderNotes();
-    updateUI();
-
+    refresh();
     notesListEl.scrollTop = 0;
+    buzz(12);
   }
 
-  function removeNote(id, el) {
-    var note = state.notes.filter(function (n) { return n.id === id; })[0];
+  function removeNote(id, elNode) {
+    var note = findById(state.notes, id);
     if (!note) return;
 
     var deletedIndex = state.notes.indexOf(note);
-
-    if (el) el.classList.add('removing');
+    if (elNode) elNode.classList.add('removing');
     state.notes.splice(deletedIndex, 1);
     save();
+    buzz(14);
 
-    setTimeout(function () {
-      renderNotes();
-      updateUI();
-    }, 220);
+    setTimeout(function () { refresh(); }, 220);
 
     showToast('Nota apagada', 'Desfazer', function () {
-      state.notes.splice(deletedIndex, 0, note);
+      state.notes.splice(Math.min(deletedIndex, state.notes.length), 0, note);
       save();
-      renderNotes();
-      updateUI();
+      refresh();
     });
   }
 
   function togglePinNote(id) {
-    var note = state.notes.filter(function (n) { return n.id === id; })[0];
+    var note = findById(state.notes, id);
     if (!note) return;
 
     note.pinned = !note.pinned;
     save();
-    renderNotes();
-    updateUI();
+    buzz(8);
+    refresh();
 
     showToast(note.pinned ? 'Nota fixada' : 'Nota desafixada', null, null);
   }
 
-  function copyNote(id) {
-    var note = state.notes.filter(function (n) { return n.id === id; })[0];
-    if (!note) return;
-
+  function copyText(text, okMsg) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(note.text).then(function () {
-        showToast('Copiado para a área de transferência', null, null);
+      navigator.clipboard.writeText(text).then(function () {
+        showToast(okMsg || 'Copiado para a área de transferência', null, null);
       }).catch(function () {
         showToast('Não foi possível copiar', null, null);
       });
@@ -1449,37 +2249,117 @@
     }
   }
 
-  /* ═══════════════ compras ═══════════════ */
+  function copyNote(id) {
+    var note = findById(state.notes, id);
+    if (note) copyText(note.text);
+  }
 
-  function buildShopItem(item, animate) {
-    var li = document.createElement('li');
-    li.className = 'note shop-item' + (item.bought ? ' bought' : '') + (animate ? '' : ' no-anim');
+  function editNote(id) {
+    var note = findById(state.notes, id);
+    if (!note) return;
+    var draft = { color: note.color || NOTE_COLORS[0] };
+
+    openSheet({
+      title: 'Editar nota',
+      build: function (b) {
+        b.appendChild(field('Nota', makeTextarea(note.text, 1000)));
+
+        var row = el('div', 'color-row');
+        NOTE_COLORS.forEach(function (c) {
+          var d = el('button', 'dot' + (c === draft.color ? ' on' : ''));
+          d.type = 'button';
+          d.style.setProperty('--c', c);
+          d.setAttribute('aria-label', 'Cor ' + c);
+          d.addEventListener('click', function () {
+            draft.color = c;
+            Array.prototype.forEach.call(row.children, function (x) { x.classList.remove('on'); });
+            d.classList.add('on');
+          });
+          row.appendChild(d);
+        });
+        b.appendChild(field('Cor', row));
+      },
+      onSave: function () {
+        var val = sheetBody.querySelector('textarea').value.trim();
+        if (val) note.text = val;
+        note.color = draft.color;
+        save();
+        closeSheet();
+        refresh();
+      }
+    });
+  }
+
+  /* ═══════════════ compras + prendas (checklist) ═══════════════ */
+
+  function addHistory(text) {
+    var t = text.trim();
+    if (!t || t.length > 30) return;
+    var key = t.toLowerCase();
+    var found = state.history.filter(function (h) { return h.t.toLowerCase() === key; })[0];
+    if (found) found.c += 1;
+    else state.history.push({ t: t, c: 1 });
+    if (state.history.length > 80) {
+      state.history.sort(function (a, b) { return b.c - a.c; });
+      state.history.length = 60;
+    }
+  }
+
+  function suggestions() {
+    var have = state.shop.filter(function (s) { return !s.bought; })
+      .map(function (s) { return s.text.toLowerCase(); });
+    var pool = state.history.slice()
+      .sort(function (a, b) { return b.c - a.c; })
+      .map(function (h) { return h.t; })
+      .concat(DEFAULT_SUG);
+    var seen = {};
+    var out = [];
+    pool.forEach(function (t) {
+      var k = t.toLowerCase();
+      if (seen[k] || have.indexOf(k) !== -1) return;
+      seen[k] = 1;
+      out.push(t);
+    });
+    return out.slice(0, 12);
+  }
+
+  function personList() {
+    var seen = {};
+    var out = [];
+    state.gifts.forEach(function (g) {
+      if (g.person && !seen[g.person]) {
+        seen[g.person] = 1;
+        out.push(g.person);
+      }
+    });
+    return out.slice(0, 10);
+  }
+
+  function buildListItem(kind, item, animate, showPerson) {
+    var cfg = LISTS[kind];
+    var li = el('li', 'note shop-item' + (item.bought ? ' bought' : '') + (animate ? '' : ' no-anim'));
     li.dataset.id = String(item.id);
 
-    var check = document.createElement('button');
+    var check = el('button', 'shop-check');
     check.type = 'button';
-    check.className = 'shop-check';
-    check.dataset.action = 'toggle-shop';
-    check.setAttribute('aria-label', item.bought ? 'Marcar como por comprar' : 'Marcar como comprado');
+    check.dataset.action = 'toggle-item';
+    check.setAttribute('aria-label', item.bought ? cfg.ariaOff : cfg.ariaOn);
     check.innerHTML = CHECK_SVG;
 
-    var body = document.createElement('div');
-    body.className = 'note-body';
-    body.dataset.action = 'toggle-shop';
-    var text = document.createElement('p');
-    text.className = 'note-text';
-    text.textContent = item.text;
-    body.appendChild(text);
+    var body = el('div', 'note-body');
+    body.dataset.action = 'toggle-item';
+    body.appendChild(el('p', 'note-text', item.text));
 
-    var actions = document.createElement('div');
-    actions.className = 'note-actions';
-    var delBtn = document.createElement('button');
-    delBtn.type = 'button';
-    delBtn.className = 'note-action';
-    delBtn.dataset.action = 'delete-shop';
-    delBtn.setAttribute('aria-label', 'Apagar item');
-    delBtn.innerHTML = DEL_SVG;
-    actions.appendChild(delBtn);
+    if (kind === 'gifts') {
+      var meta = el('div', 'note-meta');
+      if (showPerson && item.person) meta.appendChild(el('span', 'tag', item.person));
+      if (typeof item.price === 'number') meta.appendChild(el('span', 'price', fmtEur(item.price)));
+      if (meta.childNodes.length) body.appendChild(meta);
+    }
+
+    var actions = el('div', 'note-actions');
+    actions.appendChild(actionBtn('edit-item', 'Editar', EDIT_SVG));
+    actions.appendChild(actionBtn('delete-item', 'Apagar', DEL_SVG));
 
     li.appendChild(check);
     li.appendChild(body);
@@ -1487,143 +2367,305 @@
     return li;
   }
 
-  function renderShop(animate) {
-    shopListEl.innerHTML = '';
+  function sumPrices(list) {
+    return list.reduce(function (acc, g) { return acc + (typeof g.price === 'number' ? g.price : 0); }, 0);
+  }
 
-    if (state.shop.length === 0) {
-      shopListEl.innerHTML =
+  function renderList(kind, animId) {
+    var cfg = LISTS[kind];
+    var items = state[kind];
+    cfg.el.innerHTML = '';
+
+    if (items.length === 0) {
+      cfg.el.innerHTML =
         '<li class="notes-empty">' +
-          '<div class="empty-icon">' + EMPTY_SHOP_SVG + '</div>' +
-          '<p class="empty-title">Lista de compras vazia</p>' +
-          '<p class="empty-sub">Junta aqui o que falta comprar:<br>leite, pão, fruta…</p>' +
+          '<div class="empty-icon">' + cfg.icon + '</div>' +
+          '<p class="empty-title">' + cfg.title + '</p>' +
+          '<p class="empty-sub">' + cfg.sub + '</p>' +
         '</li>';
       return;
     }
 
-    var pending = state.shop.filter(function (s) { return !s.bought; });
-    var bought = state.shop.filter(function (s) { return s.bought; });
+    var visible = items.filter(matchItem);
+    if (!visible.length) {
+      cfg.el.appendChild(searchEmpty('li'));
+      return;
+    }
 
-    pending.forEach(function (item) {
-      shopListEl.appendChild(buildShopItem(item, animate));
-    });
+    var pending = visible.filter(function (s) { return !s.bought; });
+    var bought = visible.filter(function (s) { return s.bought; });
+
+    if (kind === 'gifts' && !q()) {
+      var total = sumPrices(items);
+      if (total > 0) {
+        var left = sumPrices(items.filter(function (g) { return !g.bought; }));
+        var sum = el('li', 'summary');
+        var d1 = el('div', 'accent');
+        d1.appendChild(el('small', '', 'Por comprar'));
+        d1.appendChild(el('strong', '', fmtEur(left)));
+        var d2 = el('div', '');
+        d2.appendChild(el('small', '', 'Total'));
+        d2.appendChild(el('strong', '', fmtEur(total)));
+        sum.appendChild(d1);
+        sum.appendChild(d2);
+        cfg.el.appendChild(sum);
+      }
+    }
+
+    if (kind === 'gifts') {
+      var groups = {};
+      var order = [];
+      pending.forEach(function (it) {
+        var p = it.person || '';
+        if (!groups[p]) { groups[p] = []; order.push(p); }
+        groups[p].push(it);
+      });
+      order.sort(function (a, b) {
+        if (a === '') return 1;
+        if (b === '') return -1;
+        return a.localeCompare(b, 'pt');
+      });
+      var showHeads = !(order.length === 1 && order[0] === '');
+      order.forEach(function (p) {
+        if (showHeads) {
+          var head = el('li', 'shop-sep');
+          head.appendChild(el('span', '', p || 'Sem destinatário'));
+          var sub = sumPrices(groups[p]);
+          if (sub > 0) head.appendChild(el('span', '', fmtEur(sub)));
+          cfg.el.appendChild(head);
+        }
+        groups[p].forEach(function (item) {
+          cfg.el.appendChild(buildListItem(kind, item, item.id === animId, false));
+        });
+      });
+    } else {
+      pending.forEach(function (item) {
+        cfg.el.appendChild(buildListItem(kind, item, item.id === animId, false));
+      });
+    }
 
     if (bought.length) {
-      var sep = document.createElement('li');
-      sep.className = 'shop-sep';
-      sep.innerHTML = '<span>Comprados · ' + bought.length + '</span>' +
-        '<button type="button" class="shop-clear" data-action="clear-bought">Limpar</button>';
-      shopListEl.appendChild(sep);
+      var sep = el('li', 'shop-sep');
+      sep.appendChild(el('span', '', cfg.doneLabel + ' · ' + bought.length));
+      var clr = el('button', 'shop-clear', 'Limpar');
+      clr.type = 'button';
+      clr.dataset.action = 'clear-bought';
+      sep.appendChild(clr);
+      cfg.el.appendChild(sep);
 
       bought.forEach(function (item) {
-        shopListEl.appendChild(buildShopItem(item, false));
+        cfg.el.appendChild(buildListItem(kind, item, false, true));
       });
     }
   }
 
-  function addShopItem(text) {
-    state.shop.push({ id: state.shopNext, text: text, bought: false });
-    state.shopNext += 1;
+  function addListItem(kind, text, extra) {
+    var cfg = LISTS[kind];
+    var item = { id: state[cfg.next], text: text, bought: false };
+    state[cfg.next] += 1;
+    if (extra) {
+      if (extra.person) item.person = extra.person;
+      if (typeof extra.price === 'number') item.price = extra.price;
+    }
+    if (kind === 'shop') addHistory(text);
+    state[kind].push(item);
     save();
+    refresh(item.id);
+    buzz(12);
 
-    renderShop(true);
-    updateUI();
-
-    /* ir ao fim dos pendentes */
-    var items = shopListEl.querySelectorAll('.shop-item:not(.bought)');
-    if (items.length) items[items.length - 1].scrollIntoView({ block: 'nearest' });
+    var node = cfg.el.querySelector('[data-id="' + item.id + '"]');
+    if (node && node.scrollIntoView) node.scrollIntoView({ block: 'nearest' });
   }
 
-  function toggleShopItem(id) {
-    var item = state.shop.filter(function (s) { return s.id === id; })[0];
+  function toggleListItem(kind, id) {
+    var item = findById(state[kind], id);
     if (!item) return;
     item.bought = !item.bought;
     save();
-    renderShop(false);
-    updateUI();
+    buzz(10);
+    refresh();
   }
 
-  function removeShopItem(id, el) {
-    var item = state.shop.filter(function (s) { return s.id === id; })[0];
+  function removeListItem(kind, id, elNode) {
+    var cfg = LISTS[kind];
+    var item = findById(state[kind], id);
     if (!item) return;
 
-    var deletedIndex = state.shop.indexOf(item);
-    if (el) el.classList.add('removing');
-    state.shop.splice(deletedIndex, 1);
+    var deletedIndex = state[kind].indexOf(item);
+    if (elNode) elNode.classList.add('removing');
+    state[kind].splice(deletedIndex, 1);
     save();
+    buzz(14);
 
-    setTimeout(function () {
-      renderShop(false);
-      updateUI();
-    }, 220);
+    setTimeout(function () { refresh(); }, 220);
 
-    showToast('Item apagado', 'Desfazer', function () {
-      state.shop.splice(deletedIndex, 0, item);
+    showToast(cfg.delMsg, 'Desfazer', function () {
+      state[kind].splice(Math.min(deletedIndex, state[kind].length), 0, item);
       save();
-      renderShop(false);
-      updateUI();
+      refresh();
     });
   }
 
-  function clearBought() {
-    var removed = state.shop.filter(function (s) { return s.bought; });
+  function clearBought(kind) {
+    var removed = state[kind].filter(function (s) { return s.bought; });
     if (!removed.length) return;
-    var snapshot = state.shop.slice();
+    var snapshot = state[kind].slice();
 
-    state.shop = state.shop.filter(function (s) { return !s.bought; });
+    state[kind] = state[kind].filter(function (s) { return !s.bought; });
     save();
-    renderShop(false);
-    updateUI();
+    refresh();
 
     showToast(removed.length === 1 ? '1 item removido' : removed.length + ' itens removidos', 'Desfazer', function () {
-      state.shop = snapshot;
+      state[kind] = snapshot;
       save();
-      renderShop(false);
-      updateUI();
+      refresh();
     });
   }
 
+  function editListItem(kind, id) {
+    var cfg = LISTS[kind];
+    var item = findById(state[kind], id);
+    if (!item) return;
+
+    openSheet({
+      title: cfg.editTitle,
+      build: function (b) {
+        b.appendChild(field(kind === 'gifts' ? 'Prenda' : 'Item', makeTextarea(item.text, 180)));
+        if (kind === 'gifts') {
+          var pIn = makeInput(item.person || '', 'text', 'Ex: Mãe', 30);
+          pIn.dataset.role = 'person';
+          b.appendChild(field('Para quem', pIn));
+          var prIn = makeInput(typeof item.price === 'number' ? String(item.price).replace('.', ',') : '', 'text', '0,00');
+          prIn.setAttribute('inputmode', 'decimal');
+          prIn.dataset.role = 'price';
+          b.appendChild(field('Preço (€)', prIn));
+        }
+      },
+      onSave: function () {
+        var val = sheetBody.querySelector('textarea').value.trim();
+        if (val) item.text = val;
+        if (kind === 'gifts') {
+          var person = sheetBody.querySelector('[data-role="person"]').value.trim();
+          var price = parsePrice(sheetBody.querySelector('[data-role="price"]').value);
+          if (person) item.person = person; else delete item.person;
+          if (price != null) item.price = price; else delete item.price;
+        }
+        save();
+        closeSheet();
+        refresh();
+      }
+    });
+  }
+
+  /* ═══════════════ chips rápidas ═══════════════ */
+
+  function renderChips() {
+    var mode = state.mode;
+    var list = [];
+
+    if (searchOpen || mode === 'notes') {
+      chipsEl.style.display = 'none';
+      return;
+    }
+
+    if (mode === 'tasks') {
+      list = [
+        { k: 'imp', l: '★ Importante', on: quick.important },
+        { k: 'today', l: 'Para hoje', on: quick.due === ymd(0) },
+        { k: 'tomorrow', l: 'Para amanhã', on: quick.due === ymd(1) }
+      ];
+    } else if (mode === 'shop') {
+      suggestions().forEach(function (t) { list.push({ k: 'sug', l: '+ ' + t, t: t }); });
+    } else {
+      personList().forEach(function (p) { list.push({ k: 'person', l: p, t: p, on: quick.person === p }); });
+    }
+
+    var sl = chipsEl.scrollLeft;
+    chipsEl.innerHTML = '';
+    if (!list.length) {
+      chipsEl.style.display = 'none';
+      return;
+    }
+    list.forEach(function (c) {
+      var b = el('button', 'chip' + (c.on ? ' on' : ''), c.l);
+      b.type = 'button';
+      b.dataset.chip = c.k;
+      if (c.t) b.dataset.text = c.t;
+      chipsEl.appendChild(b);
+    });
+    chipsEl.style.display = 'flex';
+    chipsEl.scrollLeft = sl;
+  }
+
+  chipsEl.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-chip]');
+    if (!b) return;
+    var k = b.dataset.chip;
+
+    if (k === 'imp') quick.important = !quick.important;
+    else if (k === 'today') quick.due = quick.due === ymd(0) ? '' : ymd(0);
+    else if (k === 'tomorrow') quick.due = quick.due === ymd(1) ? '' : ymd(1);
+    else if (k === 'person') quick.person = quick.person === b.dataset.text ? '' : b.dataset.text;
+    else if (k === 'sug') { addListItem('shop', b.dataset.text); return; }
+
+    buzz(6);
+    renderChips();
+  });
+
   /* ═══════════════ UI ═══════════════ */
+
+  function setProgress(done, total) {
+    progressWrap.style.display = '';
+    progressFillEl.classList.toggle('complete', total > 0 && done === total);
+    progressFillEl.style.width = (total ? done / total * 100 : 0) + '%';
+  }
 
   function updateUI() {
     if (state.mode === 'tasks') {
       var total = state.tasks.length;
       var done = state.tasks.filter(function (t) { return t.done; }).length;
-
-      progressWrap.style.display = '';
-      progressFillEl.classList.toggle('complete', total > 0 && done === total);
-
-      if (total === 0) {
-        counterEl.textContent = '0 / 0';
-        navInfoEl.textContent = 'Sem tarefas';
-        progressFillEl.style.width = '0%';
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
-        return;
-      }
-
-      counterEl.textContent = (currentIndex + 1) + ' / ' + total;
-      navInfoEl.textContent = (currentIndex + 1) + ' de ' + total;
-      progressFillEl.style.width = (done / total * 100) + '%';
-      prevBtn.disabled = currentIndex <= 0;
-      nextBtn.disabled = currentIndex >= total - 1;
+      counterEl.textContent = done + ' / ' + total + ' feitas';
+      setProgress(done, total);
     } else if (state.mode === 'notes') {
       var n = state.notes.length;
       counterEl.textContent = n + (n === 1 ? ' nota' : ' notas');
       progressWrap.style.display = 'none';
     } else {
-      var st = state.shop.length;
-      var got = state.shop.filter(function (s) { return s.bought; }).length;
-      counterEl.textContent = got + ' / ' + st + ' comprados';
-      progressWrap.style.display = '';
-      progressFillEl.classList.toggle('complete', st > 0 && got === st);
-      progressFillEl.style.width = (st ? got / st * 100 : 0) + '%';
+      var cfg = LISTS[state.mode];
+      var items = state[state.mode];
+      var got = items.filter(function (s) { return s.bought; }).length;
+      counterEl.textContent = got + ' / ' + items.length + ' ' + cfg.unit;
+      setProgress(got, items.length);
     }
   }
 
+  function updateBadges() {
+    var counts = {
+      tasks: state.tasks.filter(function (t) { return !t.done; }).length,
+      shop: state.shop.filter(function (s) { return !s.bought; }).length,
+      gifts: state.gifts.filter(function (s) { return !s.bought; }).length
+    };
+    Array.prototype.forEach.call(modeTabs.querySelectorAll('[data-badge]'), function (b) {
+      var c = counts[b.dataset.badge] || 0;
+      b.textContent = c > 0 ? (c > 99 ? '99+' : String(c)) : '';
+    });
+  }
+
+  function renderCurrent(animId) {
+    if (state.mode === 'tasks') renderTasks(animId);
+    else if (state.mode === 'notes') renderNotes();
+    else renderList(state.mode, animId);
+  }
+
+  function refresh(animId) {
+    renderCurrent(animId);
+    updateUI();
+    updateBadges();
+    renderChips();
+  }
+
   function render() {
-    eyebrowEl.innerHTML = timeGreeting() +
-      '<span class="sep">·</span>' +
-      weekdayLabel() + ', ' + dateLabel();
+    setEyebrow();
 
     Array.prototype.forEach.call(modeTabs.querySelectorAll('.mode-tab'), function (btn) {
       var active = btn.dataset.mode === state.mode;
@@ -1631,23 +2673,18 @@
       btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
 
-    deckEl.classList.toggle('active', state.mode === 'tasks');
+    taskViewEl.classList.toggle('active', state.mode === 'tasks');
     notesListEl.classList.toggle('active', state.mode === 'notes');
     shopListEl.classList.toggle('active', state.mode === 'shop');
-    navEl.style.display = state.mode === 'tasks' ? 'flex' : 'none';
+    giftListEl.classList.toggle('active', state.mode === 'gifts');
 
-    if (state.mode === 'tasks') {
-      inputEl.placeholder = 'O que não queres esquecer?';
-      renderTasks();
-    } else if (state.mode === 'notes') {
-      inputEl.placeholder = 'Apontar algo…';
-      renderNotes();
-    } else {
-      inputEl.placeholder = 'Adicionar à lista de compras…';
-      renderShop(true);
-    }
+    if (state.mode === 'tasks') inputEl.placeholder = 'O que não queres esquecer?';
+    else if (state.mode === 'notes') inputEl.placeholder = 'Apontar algo…';
+    else inputEl.placeholder = LISTS[state.mode].placeholder;
 
-    updateUI();
+    searchInput.placeholder = 'Pesquisar em ' + TITLES[state.mode].toLowerCase() + '…';
+
+    refresh();
   }
 
   function switchMode(newMode) {
@@ -1655,8 +2692,172 @@
     state.mode = newMode;
     save();
     render();
-    inputEl.focus();
+    /* sem focus: o teclado só abre quando tocas na caixa de texto */
   }
+
+  /* ═══════════════ partilhar / backup / definições ═══════════════ */
+
+  function listAsText() {
+    var m = state.mode;
+    var lines = [];
+    if (m === 'tasks') {
+      state.tasks.forEach(function (t) {
+        var di = dueInfo(t.due, true);
+        lines.push((t.done ? '☑ ' : '☐ ') + (t.important ? '★ ' : '') + t.text + (di ? ' (' + di.label + ')' : ''));
+      });
+    } else if (m === 'notes') {
+      return TITLES.notes + '\n\n' + sortedNotes().map(function (n) { return n.text; }).join('\n\n');
+    } else if (m === 'shop') {
+      state.shop.forEach(function (s) { lines.push((s.bought ? '☑ ' : '☐ ') + s.text); });
+    } else {
+      state.gifts.forEach(function (g) {
+        lines.push((g.bought ? '☑ ' : '☐ ') + (g.person ? g.person + ' – ' : '') + g.text +
+          (typeof g.price === 'number' ? ' (' + fmtEur(g.price) + ')' : ''));
+      });
+    }
+    return TITLES[m] + '\n\n' + lines.join('\n');
+  }
+
+  function shareCurrent() {
+    var text = listAsText();
+    if (navigator.share) {
+      navigator.share({ title: TITLES[state.mode], text: text }).catch(function () {});
+    } else {
+      copyText(text, 'Lista copiada');
+    }
+  }
+
+  function exportBackup() {
+    try {
+      var blob = new Blob([JSON.stringify(dataSnapshot(), null, 2)], { type: 'application/json' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'nao-esquecer-backup-' + ymd(0) + '.json';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function () {
+        URL.revokeObjectURL(a.href);
+        if (a.parentNode) a.parentNode.removeChild(a);
+      }, 500);
+      showToast('Backup exportado', null, null);
+    } catch (e) {
+      showToast('Não foi possível exportar', null, null);
+    }
+  }
+
+  function rowBtn(label, sub, handler, cls) {
+    var b = el('button', 'row-btn' + (cls ? ' ' + cls : ''));
+    b.type = 'button';
+    var left = el('span', '');
+    left.appendChild(document.createTextNode(label));
+    if (sub) left.appendChild(el('small', '', sub));
+    b.appendChild(left);
+    b.addEventListener('click', handler);
+    return b;
+  }
+
+  function openSettings() {
+    openSheet({
+      title: 'Definições',
+      build: function (b) {
+        /* tema */
+        var seg = el('div', 'seg');
+        [['auto', 'Auto'], ['light', 'Claro'], ['dark', 'Escuro']].forEach(function (o) {
+          var bt = el('button', 'seg-btn' + (state.settings.theme === o[0] ? ' on' : ''), o[1]);
+          bt.type = 'button';
+          bt.addEventListener('click', function () {
+            state.settings.theme = o[0];
+            save();
+            applyTheme();
+            Array.prototype.forEach.call(seg.children, function (c) { c.classList.remove('on'); });
+            bt.classList.add('on');
+          });
+          seg.appendChild(bt);
+        });
+        b.appendChild(field('Tema', seg));
+
+        /* vibração */
+        var hapRow = el('div', 'row-btn row-static');
+        var hl = el('span', '');
+        hl.appendChild(document.createTextNode('Vibração'));
+        hl.appendChild(el('small', '', 'Pequeno toque ao concluir e adicionar'));
+        var sw = el('button', 'switch');
+        sw.type = 'button';
+        sw.setAttribute('role', 'switch');
+        sw.setAttribute('aria-label', 'Vibração');
+        sw.setAttribute('aria-checked', state.settings.haptics ? 'true' : 'false');
+        sw.addEventListener('click', function () {
+          state.settings.haptics = !state.settings.haptics;
+          sw.setAttribute('aria-checked', state.settings.haptics ? 'true' : 'false');
+          save();
+          buzz(10);
+        });
+        hapRow.appendChild(hl);
+        hapRow.appendChild(sw);
+        b.appendChild(hapRow);
+
+        /* partilhar */
+        b.appendChild(rowBtn('Partilhar ' + TITLES[state.mode].toLowerCase(),
+          'Envia ou copia a lista atual como texto', function () { closeSheet(); shareCurrent(); }));
+
+        /* backup */
+        b.appendChild(rowBtn('Exportar backup', 'Guarda tudo num ficheiro .json', function () { exportBackup(); }));
+
+        var fileIn = document.createElement('input');
+        fileIn.type = 'file';
+        fileIn.accept = '.json,application/json';
+        fileIn.style.display = 'none';
+        fileIn.addEventListener('change', function () {
+          var f = fileIn.files && fileIn.files[0];
+          if (!f) return;
+          var r = new FileReader();
+          r.onload = function () {
+            try {
+              var d = JSON.parse(r.result);
+              if (!d || typeof d !== 'object') throw new Error('invalid');
+              if (!window.confirm('Substituir os dados atuais por este backup?')) return;
+              applyData(d);
+              save();
+              applyTheme();
+              closeSheet();
+              render();
+              showToast('Backup importado', null, null);
+            } catch (err) {
+              showToast('Ficheiro inválido', null, null);
+            }
+          };
+          r.readAsText(f);
+        });
+        b.appendChild(fileIn);
+        b.appendChild(rowBtn('Importar backup', 'Repõe os dados de um ficheiro .json', function () { fileIn.click(); }));
+
+        /* apagar tudo (2 toques) */
+        var armed = false;
+        var armTimer = null;
+        var wipe = rowBtn('Apagar tudo', 'Tarefas, notas, compras e prendas', function () {
+          if (!armed) {
+            armed = true;
+            wipe.firstChild.firstChild.nodeValue = 'Toca outra vez para confirmar';
+            armTimer = setTimeout(function () {
+              armed = false;
+              wipe.firstChild.firstChild.nodeValue = 'Apagar tudo';
+            }, 4000);
+            return;
+          }
+          clearTimeout(armTimer);
+          state.tasks = []; state.notes = []; state.shop = []; state.gifts = []; state.history = [];
+          state.taskNext = 1; state.noteNext = 1; state.shopNext = 1; state.giftNext = 1;
+          save();
+          closeSheet();
+          render();
+          showToast('Tudo apagado', null, null);
+        }, 'danger');
+        b.appendChild(wipe);
+      }
+    });
+  }
+
+  settingsBtn.addEventListener('click', openSettings);
 
   /* ═══════════════ add ═══════════════ */
 
@@ -1664,12 +2865,22 @@
     var text = inputEl.value.trim();
     if (!text) { inputEl.focus(); return; }
 
-    if (state.mode === 'tasks') addTask(text);
-    else if (state.mode === 'notes') addNote(text);
-    else addShopItem(text);
+    if (searchOpen) toggleSearch(false);
+
+    if (state.mode === 'tasks') {
+      addTask(text);
+    } else if (state.mode === 'notes') {
+      addNote(text);
+    } else if (state.mode === 'gifts') {
+      var g = parseGift(text);
+      if (!g.person && quick.person) g.person = quick.person;
+      addListItem('gifts', g.text, { person: g.person, price: g.price });
+    } else {
+      addListItem('shop', text);
+    }
 
     inputEl.value = '';
-    inputEl.focus();
+    inputEl.blur(); /* fecha o teclado para veres a lista */
   }
 
   addForm.addEventListener('submit', function (e) {
@@ -1698,14 +2909,21 @@
     switchMode(btn.dataset.mode);
   });
 
-  prevBtn.addEventListener('click', retreat);
-  nextBtn.addEventListener('click', advance);
+  taskViewEl.addEventListener('click', function (e) {
+    var target = e.target.closest('[data-action]');
+    if (!target) return;
+    var action = target.dataset.action;
 
-  deckEl.addEventListener('click', function (e) {
-    var btn = e.target.closest('button[data-action]');
-    if (!btn) return;
-    if (btn.dataset.action === 'toggle') toggleTask();
-    else if (btn.dataset.action === 'delete') removeTask();
+    if (action === 'clear-done') { clearDoneTasks(); return; }
+
+    var cardEl = target.closest('.kcard');
+    if (!cardEl) return;
+    var id = Number(cardEl.dataset.id);
+
+    if (action === 'toggle-task') toggleTask(id);
+    else if (action === 'star-task') starTask(id);
+    else if (action === 'edit-task') editTask(id);
+    else if (action === 'delete-task') removeTask(id, cardEl);
   });
 
   notesListEl.addEventListener('click', function (e) {
@@ -1716,63 +2934,55 @@
     var id = Number(noteEl.dataset.id);
 
     if (btn.dataset.action === 'pin') togglePinNote(id);
+    else if (btn.dataset.action === 'edit-note') editNote(id);
     else if (btn.dataset.action === 'copy') copyNote(id);
     else if (btn.dataset.action === 'delete-note') removeNote(id, noteEl);
   });
 
-  shopListEl.addEventListener('click', function (e) {
-    var target = e.target.closest('[data-action]');
-    if (!target) return;
-    var action = target.dataset.action;
+  function bindList(kind) {
+    LISTS[kind].el.addEventListener('click', function (e) {
+      var target = e.target.closest('[data-action]');
+      if (!target) return;
+      var action = target.dataset.action;
 
-    if (action === 'clear-bought') { clearBought(); return; }
+      if (action === 'clear-bought') { clearBought(kind); return; }
 
-    var itemEl = target.closest('.shop-item');
-    if (!itemEl) return;
-    var id = Number(itemEl.dataset.id);
+      var itemEl = target.closest('.shop-item');
+      if (!itemEl) return;
+      var id = Number(itemEl.dataset.id);
 
-    if (action === 'toggle-shop') toggleShopItem(id);
-    else if (action === 'delete-shop') removeShopItem(id, itemEl);
-  });
+      if (action === 'toggle-item') toggleListItem(kind, id);
+      else if (action === 'edit-item') editListItem(kind, id);
+      else if (action === 'delete-item') removeListItem(kind, id, itemEl);
+    });
+  }
+  bindList('shop');
+  bindList('gifts');
 
   document.addEventListener('keydown', function (e) {
-    if (document.activeElement === inputEl) return;
-
-    if (state.mode === 'tasks') {
-      if (e.key === 'ArrowRight') { e.preventDefault(); advance(); }
-      else if (e.key === 'ArrowLeft') { e.preventDefault(); retreat(); }
+    if (e.key === 'Escape') {
+      if (sheetOpen) { closeSheet(); return; }
+      if (searchOpen) { toggleSearch(false); return; }
+      if (toast.classList.contains('show')) hideToast();
+      return;
     }
 
-    if ((e.metaKey || e.ctrlKey) && e.key === '1') { e.preventDefault(); switchMode('tasks'); }
-    if ((e.metaKey || e.ctrlKey) && e.key === '2') { e.preventDefault(); switchMode('notes'); }
-    if ((e.metaKey || e.ctrlKey) && e.key === '3') { e.preventDefault(); switchMode('shop'); }
+    var a = document.activeElement;
+    if (a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA')) return;
+    if (sheetOpen) return;
 
-    if (e.key === 'Escape' && toast.classList.contains('show')) hideToast();
+    if ((e.metaKey || e.ctrlKey) && e.key === '1') { e.preventDefault(); switchMode('tasks'); }
+    else if ((e.metaKey || e.ctrlKey) && e.key === '2') { e.preventDefault(); switchMode('notes'); }
+    else if ((e.metaKey || e.ctrlKey) && e.key === '3') { e.preventDefault(); switchMode('shop'); }
+    else if ((e.metaKey || e.ctrlKey) && e.key === '4') { e.preventDefault(); switchMode('gifts'); }
+    else if (e.key === '/') { e.preventDefault(); toggleSearch(true); }
   });
 
-  /* swipe no deck */
-  var touchStartX = 0, touchStartY = 0, touchMoved = false, touchTarget = null;
-
-  deckEl.addEventListener('touchstart', function (e) {
-    touchTarget = e.target;
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    touchMoved = false;
-  }, { passive: true });
-
-  deckEl.addEventListener('touchmove', function (e) {
-    var dx = Math.abs(e.touches[0].clientX - touchStartX);
-    var dy = Math.abs(e.touches[0].clientY - touchStartY);
-    if (dx > 10 || dy > 10) touchMoved = true;
-  }, { passive: true });
-
-  deckEl.addEventListener('touchend', function (e) {
-    if (!touchMoved) return;
-    if (touchTarget && touchTarget.closest('button')) return;
-    var dx = e.changedTouches[0].clientX - touchStartX;
-    var dy = e.changedTouches[0].clientY - touchStartY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 70) {
-      if (dx > 0) retreat(); else advance();
+  /* ao voltar à app (novo dia, prazos, tema) */
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible' && !sheetOpen) {
+      setEyebrow();
+      refresh();
     }
   });
 
